@@ -496,7 +496,12 @@
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
-        <ul class="nav-links">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">🏠 Home</a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme"
@@ -510,7 +515,7 @@
 
         <!-- SHOW HEADER -->
         <div class="show-header">
-            <img src="bluelock.jpg" alt="Blue Lock cover">
+            <img src="bluelock.jpg" alt="Blue Lock cover" loading="lazy" decoding="async">
             <div class="show-info">
                 <h1>BLUE LOCK</h1>
                 <p>
@@ -548,7 +553,7 @@
                     <div class="season-body-inner">
                         <div class="season-content">
                             <div class="season-cover">
-                                <img src="bluelocks1.jfif" alt="Blue Lock Season 1">
+                                <img src="bluelocks1.jfif" alt="Blue Lock Season 1" loading="lazy" decoding="async">
                             </div>
                             <div class="season-episodes">
                                 <ul class="episode-list" id="listS1"></ul>
@@ -574,7 +579,7 @@
                     <div class="season-body-inner">
                         <div class="season-content">
                             <div class="season-cover">
-                                <img src="bluelocks2.webp" alt="Blue Lock Season 2">
+                                <img src="bluelocks2.webp" alt="Blue Lock Season 2" loading="lazy" decoding="async">
                             </div>
                             <div class="season-episodes">
                                 <ul class="episode-list" id="listS2"></ul>
@@ -849,6 +854,25 @@
         modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // ─── Hamburger menu ──────────────────────────────────────────────────────
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', false);
+            });
         });
 
         // ─── Theme toggle ─────────────────────────────────────────────────────────

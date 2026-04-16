@@ -18,7 +18,12 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">🏠 Home</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">☀️</button>
@@ -51,7 +56,7 @@
     <div class="anime-grid" id="animeGrid">
 
       <a href="JJKS3.html" class="anime-card">
-        <img src="jjks3.jpg" alt="To Be Hero X cover">
+        <img src="jjks3.jpg" alt="Jujutsu Kaisen Season 3 cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Jujutsu Kaisen Season 3</div>
           <span class="card-badge">Season 1 • 24 Episodes</span>
@@ -59,7 +64,7 @@
       </a>
 
       <a href="TBH X.html" class="anime-card">
-        <img src="tbhx.png" alt="To Be Hero X cover">
+        <img src="tbhx.png" alt="To Be Hero X cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">To Be Hero X</div>
           <span class="card-badge">Season 1 • 24 Episodes</span>
@@ -67,7 +72,7 @@
       </a>
 
       <a href="sololeveling.html" class="anime-card">
-        <img src="solo leveling.jpg" alt="Solo Leveling cover">
+        <img src="solo leveling.jpg" alt="Solo Leveling cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Solo Leveling</div>
           <div class="card-badge">
@@ -78,7 +83,7 @@
       </a>
 
       <a href="kaijuno 8.html" class="anime-card">
-        <img src="kaiju.jpg" alt="Kaiju No. 8 cover">
+        <img src="kaiju.jpg" alt="Kaiju No. 8 cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Kaiju No. 8</div>
           <div class="card-badge">
@@ -90,7 +95,7 @@
 
 
       <a href="Haikyuu.html" class="anime-card">
-        <img src="haikyuu.webp" alt="Haikyuu!! cover">
+        <img src="haikyuu.webp" alt="Haikyuu!! cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Haikyuu!!</div>
           <div class="card-badge">
@@ -104,7 +109,7 @@
 
 
       <a href="Blue Lock.html" class="anime-card">
-        <img src="bluelock.jpg" alt="Blue Lock cover">
+        <img src="bluelock.jpg" alt="Blue Lock cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Blue Lock</div>
           <div class="card-badge">
@@ -115,7 +120,7 @@
       </a>
 
       <a href="Dr Stone.html" class="anime-card">
-        <img src="Drstone.jpg" alt="Dr Stone cover">
+        <img src="Drstone.jpg" alt="Dr Stone cover" loading="lazy" decoding="async">
         <div class="card-body">
           <div class="card-title">Dr Stone</div>
           <div class="card-badge">
@@ -199,6 +204,25 @@
 
     // Initialise
     filterCards();
+
+    // ─── Hamburger menu ──────────────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    hamburger.addEventListener('click', function () {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
 
     // ─── Theme toggle ────────────────────────────────────────────────────────
     var themeBtn = document.getElementById('themeToggle');
