@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haikyuu!! — αηιмєѕ தமிழ்</title>
+    <meta name="description" content="Watch Haikyuu!! all seasons and episodes in Tamil on αηιмєѕ தமிழ்.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script>/* apply saved theme before paint */
+        (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
+    </script>
+    <style>
+        /* ====== VIDEO MODAL ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(10, 10, 20, 0.92);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            position: relative;
+            width: 92vw;
+            max-width: 900px;
+            background: linear-gradient(145deg, #0f1e3a, #1a1a2e);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(135, 206, 235, 0.15), 0 24px 80px rgba(0, 0, 0, 0.7);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(135, 206, 235, 0.06);
+            border-bottom: 1px solid rgba(135, 206, 235, 0.15);
+        }
+
+        .modal-ep-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--sky-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .modal-close {
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid var(--light-red);
+            color: var(--light-red);
+            font-size: 1.1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: var(--light-red);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
+        }
+
+        .modal-video-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+        }
+
+        .modal-video-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(176, 108, 245, 0.05);
+            border-top: 1px solid rgba(176, 108, 245, 0.15);
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .modal-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .btn-prev {
+            background: rgba(176, 108, 245, 0.15);
+            color: var(--purple);
+            border: 1px solid var(--purple);
+        }
+
+        .btn-prev:hover {
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(176, 108, 245, 0.4);
+        }
+
+        .btn-next {
+            background: rgba(135, 206, 235, 0.15);
+            color: var(--sky-blue);
+            border: 1px solid var(--sky-blue);
+        }
+
+        .btn-next:hover {
+            background: var(--sky-blue-dark);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(135, 206, 235, 0.4);
+        }
+
+        .btn-prev:disabled,
+        .btn-next:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .modal-ep-counter {
+            font-size: 0.82rem;
+            color: rgba(135, 206, 235, 0.6);
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Active episode highlight */
+        .ep-link.ep-active {
+            background: rgba(135, 206, 235, 0.12) !important;
+            border-color: var(--sky-blue) !important;
+            color: var(--sky-blue) !important;
+        }
+
+        .ep-link.ep-active::before {
+            opacity: 1 !important;
+        }
+
+        .ep-link.ep-active .ep-icon {
+            opacity: 1 !important;
+        }
+
+        .cast-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(135, 206, 235, 0.15);
+            border: 1px solid var(--sky-blue);
+            color: var(--sky-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        .cast-btn:hover {
+            background: var(--sky-blue);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(135, 206, 235, 0.3);
+        }
+
+        .cast-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cast-btn.casting {
+            opacity: 0.6;
+        }
+
+        .quality-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(135, 206, 235, 0.1);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            border-radius: 8px;
+        }
+
+        .quality-btn {
+            padding: 6px 10px;
+            background: rgba(135, 206, 235, 0.08);
+            border: 1px solid rgba(135, 206, 235, 0.4);
+            color: var(--sky-blue);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        .quality-btn:hover {
+            background: rgba(135, 206, 235, 0.2);
+        }
+
+        .quality-btn.active {
+            background: var(--sky-blue);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(135, 206, 235, 0.3);
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid var(--light-red);
+            color: var(--light-red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        .download-btn:hover {
+            background: var(--light-red);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(255, 107, 107, 0.3);
+        }
+
+        .download-btn:active {
+            transform: scale(0.95);
+        }
+
+        .download-btn.loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ====== SEASON ACCORDION ====== */
+        .seasons-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .season-block {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-purple);
+            background: rgba(15, 52, 96, 0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .season-block.open {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 24px rgba(135, 206, 235, 0.1);
+        }
+
+        .season-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            background: rgba(15, 52, 96, 0.45);
+            transition: background 0.25s ease;
+            gap: 16px;
+        }
+
+        .season-header:hover {
+            background: rgba(135, 206, 235, 0.08);
+        }
+
+        .season-header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .season-num-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .season-header-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--sky-blue);
+            margin-bottom: 3px;
+        }
+
+        .season-header-meta {
+            font-size: 0.8rem;
+            color: rgba(135, 206, 235, 0.55);
+        }
+
+        .season-chevron {
+            font-size: 1rem;
+            color: var(--purple);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .season-block.open .season-chevron {
+            transform: rotate(180deg);
+        }
+
+        .season-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .season-block.open .season-body {
+            max-height: 3000px;
+        }
+
+        .season-body-inner {
+            padding: 4px 16px 16px;
+        }
+
+        /* Season layout: image + episodes side by side */
+        .season-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .season-cover {
+            width: 140px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--border-purple);
+            box-shadow: 0 0 20px rgba(176, 108, 245, 0.2), 0 8px 24px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        .season-cover img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .season-block.open .season-cover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 28px rgba(135, 206, 235, 0.25), 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .season-episodes {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 600px) {
+            .season-content {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .season-cover {
+                width: 100%;
+                position: static;
+            }
+
+            .season-cover img {
+                max-height: 180px;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .season-header {
+                padding: 14px 16px;
+            }
+
+            .season-body-inner {
+                padding: 4px 10px 12px;
+            }
+
+            .season-num-badge {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+
+            .season-header-title {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== VIDEO MODAL ===== -->
+    <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalEpTitle">
+        <div class="modal-box">
+            <div class="modal-topbar">
+                <div class="modal-ep-title" id="modalEpTitle">Episode</div>
+                <button class="modal-close" id="modalClose" title="Close (Esc)">✕</button>
+            </div>
+            <div class="modal-video-wrap">
+                <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+            </div>
+            <div class="modal-controls">
+                <button class="modal-nav-btn btn-prev" id="btnPrev">◀ Previous</button>
+                <div class="quality-selector" id="qualitySelector">
+                    <button class="quality-btn active" data-quality="720p">720p</button>
+                    <button class="quality-btn" data-quality="480p">480p</button>
+                    <button class="quality-btn" data-quality="360p">360p</button>
+                </div>
+                <div class="modal-ep-counter" id="epCounter">1 / 73</div>
+                <button class="download-btn" id="downloadBtn" title="Download current episode">
+                    ⬇ Download
+                </button>
+                <button class="cast-btn" id="castBtn" title="Cast to device">📺 Cast</button>
+                <button class="modal-nav-btn btn-next" id="btnNext">Next ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
+        <ul class="nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme"
+            title="Toggle theme">☀️</button>
+    </nav>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <div class="page-wrapper">
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <!-- SHOW HEADER -->
+        <div class="show-header">
+            <img src="haikyuu.webp" alt="Haikyuu!! cover">
+            <div class="show-info">
+                <h1>HAIKYUU!!</h1>
+                <p class="show-meta">
+                    4 Seasons &nbsp;•&nbsp; 73 Episodes &nbsp;•&nbsp; 🏐 Sports Anime
+                </p>
+                <div class="genre-tags">
+                    <span class="genre-tag action">Sports</span>
+                    <span class="genre-tag anime">Anime</span>
+                    <span class="genre-tag hero">Shounen</span>
+                </div>
+                <p class="show-description">
+                    Follow Hinata Shoyo's journey to become the greatest volleyball player, defying all odds with sheer
+                    willpower and teamwork. 🏐
+                </p>
+                <p class="show-info > p">
+                    Click any episode below to watch it right here. 🎬
+                </p>
+            </div>
+        </div>
+
+        <!-- SEASON SECTION TITLE -->
+        <div class="section-title">Seasons</div>
+
+        <!-- SEASON ACCORDION -->
+        <div class="seasons-wrap" id="seasonsWrap">
+
+            <!-- Season 1 -->
+            <div class="season-block" id="block-s1">
+                <div class="season-header" id="hdr-s1" role="button" aria-expanded="false" aria-controls="body-s1">
+                    <div class="season-header-left">
+                        <div class="season-num-badge">1</div>
+                        <div>
+                            <div class="season-header-title">Season 1</div>
+                            <div class="season-header-meta">25 Episodes &nbsp;·&nbsp; 2014</div>
+                        </div>
+                    </div>
+                    <span class="season-chevron">▼</span>
+                </div>
+                <div class="season-body" id="body-s1">
+                    <div class="season-body-inner">
+                        <div class="season-content">
+                            <div class="season-cover">
+                                <img src="haikyuu.jpg" alt="Haikyuu!! Season 1">
+                            </div>
+                            <div class="season-episodes">
+                                <ul class="episode-list" id="listS1"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Season 2 block -->
+            <div class="season-block" id="block-s2">
+                <div class="season-header" id="hdr-s2" role="button" aria-expanded="true" aria-controls="body-s2">
+                    <div class="season-header-left">
+                        <div class="season-num-badge">2</div>
+                        <div>
+
+                            <div class="season-header-title">Season 2</div>
+                            <div class="season-header-meta">25 Episodes &nbsp;·&nbsp; 2015</div>
+                        </div>
+                    </div>
+                    <span class="season-chevron">▼</span>
+                </div>
+                <div class="season-body" id="body-s2">
+                    <div class="season-body-inner">
+                        <div class="season-content">
+                            <div class="season-cover">
+                                <img src="haikyuus2.jpg" alt="Haikyuu!! Season 2">
+                            </div>
+                            <div class="season-episodes">
+                                <ul class="episode-list" id="listS2"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Season 3 block -->
+            <div class="season-block" id="block-s3">
+                <div class="season-header" id="hdr-s3" role="button" aria-expanded="true" aria-controls="body-s3">
+                    <div class="season-header-left">
+                        <div class="season-num-badge">3</div>
+                        <div>
+
+                            <div class="season-header-title">Season 3</div>
+                            <div class="season-header-meta">10 Episodes &nbsp;·&nbsp; 2016</div>
+                        </div>
+                    </div>
+                    <span class="season-chevron">▼</span>
+                </div>
+                <div class="season-body" id="body-s3">
+                    <div class="season-body-inner">
+                        <div class="season-content">
+                            <div class="season-cover">
+                                <img src="haikyuus3.jpg" alt="Haikyuu!! Season 3">
+                            </div>
+                            <div class="season-episodes">
+                                <ul class="episode-list" id="listS3"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Season 4 block -->
+            <div class="season-block" id="block-s4">
+                <div class="season-header" id="hdr-s4" role="button" aria-expanded="true" aria-controls="body-s4">
+                    <div class="season-header-left">
+                        <div class="season-num-badge">4</div>
+                        <div>
+
+                            <div class="season-header-title">Season 4</div>
+                            <div class="season-header-meta">13 Episodes &nbsp;·&nbsp; 2020</div>
+                        </div>
+                    </div>
+                    <span class="season-chevron">▼</span>
+                </div>
+                <div class="season-body" id="body-s4">
+                    <div class="season-body-inner">
+                        <div class="season-content">
+                            <div class="season-cover">
+                                <img src="haikyuus4.jpg" alt="Haikyuu!! Season 4">
+                            </div>
+                            <div class="season-episodes">
+                                <ul class="episode-list" id="listS4"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
+        <p class="copyright">&copy; 2026 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized
+            reproduction or distribution is prohibited.</p>
+    </footer>
+
+    <script>
+        // ─── Episode data ───────────────────────────────────────────────────────────
+        const season1 = [
+            { label: 'Haikyuu!! — Season 1 Episode 1', url: 'https://drive.google.com/file/d/14x03SyTO67QUKjpjFS2pR1n2X7lVdZGv/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 2', url: 'https://drive.google.com/file/d/1FvegS5MwZXsP91B36p8p28Ie2BCBrMmr/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 3', url: 'https://drive.google.com/file/d/10g6aNcoxgBFV7Lof6YeZLNKFF3Zec7N_/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 4', url: 'https://drive.google.com/file/d/1nr23TAJVKKl_1Ys1dkefRC4N_PAXpgI6/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 5', url: 'https://drive.google.com/file/d/1cZE7AefTiUwq-vjv4nO00LlL3BlUYgY3/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 6', url: 'https://drive.google.com/file/d/1OKmz2DTRern7k5rtkg8XU9r8KQUHuNPr/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 7', url: 'https://drive.google.com/file/d/1VYbIe9qkKq2ZXQdMTgqCoJIxi-gmM-DE/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 8', url: 'https://drive.google.com/file/d/1OHRDLONojv-4DOxvmwAyli0pQT2AJ0CD/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 9', url: 'https://drive.google.com/file/d/1f8F3rheURhWStBqMAS4ZFo6zja8nLa5l/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 10', url: 'https://drive.google.com/file/d/1Vp-lqs8nSIDxUVAdXmOVdr19qQi_rskN/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 11', url: 'https://drive.google.com/file/d/189YWpkttPRUZIU_qLJKjJGPeaQO_I249/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 12', url: 'https://drive.google.com/file/d/1IlYMOEfUGqr2rP8BuiBb1FwWzgIbqCYg/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 13', url: 'https://drive.google.com/file/d/1y1l5naknuQYbhPmAkfriIMZL9dB9kuDP/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 14', url: 'https://drive.google.com/file/d/1cKnvj_dW2OWu0by1hz4rDFkGbGxsPvBH/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 15', url: 'https://drive.google.com/file/d/1Nhlqw22QpqS2rOG44TGUMyzilQJu7Ex1/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 16', url: 'https://drive.google.com/file/d/1WeYeqkrL-dU3-0DklaYJOiPuKyDBRgnt/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 17', url: 'https://drive.google.com/file/d/1N1XaKy5wmI0h6BXSecwu_ZAVdDcYo-UO/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 18', url: 'https://drive.google.com/file/d/1xX_dwn_23NbxpE0o--PEonXPGcU22ZBb/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 19', url: 'https://drive.google.com/file/d/1opre7vRmsDnUn8TKRByUeNee1-Ffpy6n/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 20', url: 'https://drive.google.com/file/d/1EG2nz450w3kDYdM0DXYmy1sM5WqgjKYi/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 21', url: 'https://drive.google.com/file/d/1iycOTB7DDHjgEW1F7UV2ZwVFRpOjNATQ/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 22', url: 'https://drive.google.com/file/d/1Cwo6cjvV4eHfLHHrTSKxR_iXlSo_fxzv/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 23', url: 'https://drive.google.com/file/d/1mNQwfd0qsvERbodojfNSifk2A8jCWNH0/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 24', url: 'https://drive.google.com/file/d/1Ibv_9GWKnPvkRWvJuce1-YkS_IL8BVeM/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 1 Episode 25', url: 'https://drive.google.com/file/d/1Gxwrs-1FkwrMtQk7qnETx_nEmJzP37UB/view?usp=sharing' },
+        ];
+
+        const season2 = [
+            { label: 'Haikyuu!! — Season 2 Episode 1', url: 'https://drive.google.com/file/d/10kGoPIwp610GgmvIfjfQRp_kU7UVgz0v/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 2', url: 'https://drive.google.com/file/d/1H9rstzbp7JUL-z6wiujLlSZsGfaZ2yF1/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 3', url: 'https://drive.google.com/file/d/1kz5TqBcsRzvzj7lvLp_DAlR3mfyk27vc/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 4', url: 'https://drive.google.com/file/d/1r3n8TNhSXhUA00h4ixyGiaRcwkuSTzoh/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 5', url: 'https://drive.google.com/file/d/1QKefzPxfNk74o9fB05JqYHhoyVBocOZY/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 6', url: 'https://drive.google.com/file/d/1RalokZUYPwHyABWL5mgqsmMipzwvWsq8/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 7', url: 'https://drive.google.com/file/d/1diYkEqJDyJZmPLiMX5UKil2mIyMUnQ54/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 8', url: 'https://drive.google.com/file/d/1dA0JzwUR43-gh3KnBPOHGP1lO7soeYCK/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 9', url: 'https://drive.google.com/file/d/12gbxnLtV3mvLyc08VMZg6M8RlmXRcZjf/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 10', url: 'https://drive.google.com/file/d/1_tGK8RBisuVWwKZi6EdkkVpqNXY4-I68/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 11', url: 'https://drive.google.com/file/d/1s-fgwKKYfKVEMbS6omeIFLCPSdenDxXj/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 12', url: 'https://drive.google.com/file/d/1RBmAk780FP0h5og1VGdrvEOKrLuxebpm/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 13', url: 'https://drive.google.com/file/d/1ZLEgXSeyYJxj_LN_JeVH6Emye6WyNWso/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 14', url: 'https://drive.google.com/file/d/1r8MSQQ2LzCsOMXawdKvRA8nXH4TOxVV9/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 15', url: 'https://drive.google.com/file/d/1Aszri_17xIoCrtG-A6qwclONdUWsaRo5/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 16', url: 'https://drive.google.com/file/d/1kbo52XL4XZ3li3ieSQwJsC2AWclGeccS/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 17', url: 'https://drive.google.com/file/d/1XCkTFcxfEiaZ2jLgQrh15B8ohFUvVR6w/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 18', url: 'https://drive.google.com/file/d/1pn8T3rEETh4Q61ucKWiIJiEkNOpz11Z8/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 19', url: 'https://drive.google.com/file/d/1V5MxKrn3k670Aj-HM6LWMdYUowaiZzHI/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 20', url: 'https://drive.google.com/file/d/1tR7XhcVlp0EViPgbeLWhcYwaDwgwrLdN/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 21', url: 'https://drive.google.com/file/d/1zxAMMN1XPWGaprEQOB4oGWuLcYqnzDfg/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 22', url: 'https://drive.google.com/file/d/1pI6AonQsdTqSbhlMsm3v8Y35cXDO52Uc/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 23', url: 'https://drive.google.com/file/d/1CXuBjmDZP2hFPMkAqUxswMcLsmdssYSq/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 24', url: 'https://drive.google.com/file/d/1rrYiIxftH19a38iA4K4qN82MEnRuahB4/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 2 Episode 25', url: 'https://drive.google.com/file/d/1ojf3U2vNPpfGNe9U3RsUDZqs-Lqp4UMb/view?usp=sharing' },
+        ];
+
+        const season3 = [
+            { label: 'Haikyuu!! — Season 3 Episode 1', url: 'https://drive.google.com/file/d/1sYCgxTcRjw_3Pf8Dl-eV18JX8lxzu7bA/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 2', url: 'https://drive.google.com/file/d/1sseLfxaYX6GyQd2h8yGgrGS3PbFDWZg6/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 3', url: 'https://drive.google.com/file/d/1I3Xvk_ALaVEDMdwe97XTunZDLl4wuYVB/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 4', url: 'https://drive.google.com/file/d/1eWMst9wo6QahxzJopM1p0XojLvufEp1f/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 5', url: 'https://drive.google.com/file/d/1kyfFT1pUqflsCmPdUXRlVpbAvEGlNIOp/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 6', url: 'https://drive.google.com/file/d/15PRb8FqJglJiElhlMPdha8mMYvd0JWCG/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 7', url: 'https://drive.google.com/file/d/14dpKUfRU2H2ukH4gNT2QDmmxlyYTE3q9/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 8', url: 'https://drive.google.com/file/d/11huK7u934o8VgLPyjczMMHoctN-OdAyl/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 9', url: 'https://drive.google.com/file/d/1za1RhagJdHGyeMN-1D9bj4eFLxDdSFV6/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 3 Episode 10', url: 'https://drive.google.com/file/d/19RUgeuAIGM2EHxZ0v2OlX0D12kBKpdp4/view?usp=sharing' },
+        ];
+
+        const season4 = [
+            { label: 'Haikyuu!! — Season 4 Episode 1', url: 'https://drive.google.com/file/d/1w-NOuW6C-5fOsyWG_MKxntJ2ZWzURj3P/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 2', url: 'https://drive.google.com/file/d/1AjHxLcjlWj-19PUT1lw4-f39A0s_AMjN/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 3', url: 'https://drive.google.com/file/d/1jcE5yyBMWyHSrzDtj3glCf9QMX4CUquE/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 4', url: 'https://drive.google.com/file/d/1a45f00dJKSgg-Fhomav_xj5YiZP1lGN2/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 5', url: 'https://drive.google.com/file/d/1Ewgg9mlNgnNgBkT467IpnFW6-SZkpuFM/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 6', url: 'https://drive.google.com/file/d/1j2D0Xqx_8IE8Qq64bVfjnAilIcLsD1jZ/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 7', url: 'https://drive.google.com/file/d/1pGPgbgc0-RI8VJXrnoMLzA3fUr9ufRQ1/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 8', url: 'https://drive.google.com/file/d/1mA57xV2V_MGtXkNWn4gaMzcEYLs0UPEM/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 9', url: 'https://drive.google.com/file/d/1KQ7CiumEgduYHjGssCJ42fRLRDDmJPmg/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 10', url: 'https://drive.google.com/file/d/1Bv0284c7rCpTx4Ki8li3s8A-hYtJ-YgY/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 11', url: 'https://drive.google.com/file/d/1-8O5Hj8llVVJFqVTLBh5aNOBE-wdgV5C/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 12', url: 'https://drive.google.com/file/d/1bo9D-Yu_Ba4DOpkgigBJCBB9_Ku_F0Yq/view?usp=sharing' },
+            { label: 'Haikyuu!! — Season 4 Episode 13', url: 'https://drive.google.com/file/d/1wKAQ3JL9rygt-h-llJJRJvM_YnDw4ozJ/view?usp=sharing' },
+
+
+        ];
+
+        const allEpisodes = [...season1, ...season2, ...season3, ...season4];
+        const total = allEpisodes.length;
+        let currentEp = 0;
+
+        // ─── URL handler ────────────────────────────────────────────────────────────
+        function embedUrl(shareUrl) {
+            // Google Drive: convert share link to embed
+            const m = shareUrl.match(/\/file\/d\/([^/]+)\//);
+            return m ? `https://drive.google.com/file/d/${m[1]}/preview` : shareUrl;
+        }
+
+        // ─── Build episode list ─────────────────────────────────────────────────────
+        function buildList(listId, episodes, globalOffset) {
+            const ul = document.getElementById(listId);
+            episodes.forEach((ep, i) => {
+                const globalIndex = globalOffset + i;
+                const epNum = String(i + 1).padStart(2, '0');
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="#" class="ep-link" data-index="${globalIndex}" id="ep-${globalIndex}">
+                        <span class="ep-number">${epNum}</span>
+                        ${ep.label}
+                        <span class="ep-icon">▶</span>
+                    </a>`;
+                ul.appendChild(li);
+            });
+        }
+
+        buildList('listS1', season1, 0);
+        buildList('listS2', season2, season1.length);
+        buildList('listS3', season3, season1.length + season2.length);
+        buildList('listS4', season4, season1.length + season2.length + season3.length);
+
+
+
+
+
+        // ─── Season accordion toggle ────────────────────────────────────────────────
+        function toggleSeason(blockId, headerId) {
+            const block = document.getElementById(blockId);
+            const hdr = document.getElementById(headerId);
+            const isOpen = block.classList.contains('open');
+            block.classList.toggle('open', !isOpen);
+            hdr.setAttribute('aria-expanded', String(!isOpen));
+        }
+
+        document.getElementById('hdr-s1').addEventListener('click', () => toggleSeason('block-s1', 'hdr-s1'));
+        document.getElementById('hdr-s2').addEventListener('click', () => toggleSeason('block-s2', 'hdr-s2'));
+        document.getElementById('hdr-s3').addEventListener('click', () => toggleSeason('block-s3', 'hdr-s3'));
+        document.getElementById('hdr-s4').addEventListener('click', () => toggleSeason('block-s4', 'hdr-s4'));
+
+        // ─── Modal elements ─────────────────────────────────────────────────────────
+        const modal = document.getElementById('videoModal');
+        const iframe = document.getElementById('modalIframe');
+        const modalTitle = document.getElementById('modalEpTitle');
+        const epCounter = document.getElementById('epCounter');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const btnClose = document.getElementById('modalClose');
+        const qualityBtns = document.querySelectorAll('.quality-btn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const castBtn = document.getElementById('castBtn');
+        let castSession = null;
+        let currentQuality = '720p';
+
+        function openEpisode(index) {
+            currentEp = index;
+            currentQuality = '720p';
+            const ep = allEpisodes[index];
+            modalTitle.textContent = ep.label;
+            epCounter.textContent = `${index + 1} / ${total}`;
+            iframe.src = embedUrl(ep.url);
+            btnPrev.disabled = index === 0;
+            btnNext.disabled = index === total - 1;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+            const activeLink = document.getElementById(`ep-${index}`);
+            if (activeLink) activeLink.classList.add('ep-active');
+
+            // Reset quality buttons
+            qualityBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-quality="720p"]').classList.add('active');
+        }
+
+        function updateVideoQuality(quality) {
+            currentQuality = quality;
+            const ep = allEpisodes[currentEp];
+            iframe.src = embedUrl(ep.url);
+            
+            // Update active quality button
+            qualityBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-quality="${quality}"]`).classList.add('active');
+        }
+
+        function downloadEpisode() {
+            const ep = allEpisodes[currentEp];
+            const match = ep.url.match(/\/file\/d\/([^\/]+)\//);
+            if (!match || !match[1]) {
+                console.error('Could not extract file ID');
+                return;
+            }
+            
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${match[1]}`;
+            
+            downloadBtn.classList.add('loading');
+            downloadBtn.textContent = '⏳ Preparing...';
+            downloadBtn.disabled = true;
+            
+            // Open download link
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.target = '_blank';
+            a.click();
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                downloadBtn.classList.remove('loading');
+                downloadBtn.textContent = '⬇ Download';
+                downloadBtn.disabled = false;
+            }, 2000);
+        }
+
+
+        function closeModal() {
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+            document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+        }
+
+        // ─── Cast/Chromecast functionality ─────────────────────────────────────────
+        function initCastApi() {
+            window['__onGCastApiAvailable'] = function(isAvailable) {
+                if (isAvailable) {
+                    cast.framework.CastContext.getInstance().setOptions({
+                        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                        autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+                    });
+                }
+            };
+        }
+
+        function castEpisode() {
+            if (!castSession) {
+                castBtn.classList.add('casting');
+                castBtn.textContent = '📺 Connecting...';
+                
+                const castContext = cast.framework.CastContext.getInstance();
+                castContext.requestSession().then(
+                    function(session) {
+                        castSession = session;
+                        const currentUrl = iframe.src;
+                        
+                        const mediaInfo = new chrome.cast.media.MediaInfo(currentUrl, 'video/mp4');
+                        const request = new chrome.cast.media.LoadRequest(mediaInfo);
+                        request.autoplay = true;
+                        
+                        castSession.loadMedia(request).then(
+                            function() {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Casting...';
+                                console.log('Video casting started');
+                            },
+                            function(err) {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Cast';
+                                console.error('Error casting video:', err);
+                            }
+                        );
+                        
+                        castSession.addUpdateListener(function() {
+                            if (castSession.isMediaLoaded === false) {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Cast';
+                                castSession = null;
+                            }
+                        });
+                    },
+                    function(err) {
+                        castBtn.classList.remove('casting');
+                        castBtn.textContent = '📺 Cast';
+                        console.error('Error initializing cast session:', err);
+                    }
+                );
+            } else {
+                // Stop casting if already casting
+                castSession.stop(
+                    function() {
+                        castBtn.classList.remove('casting');
+                        castBtn.textContent = '📺 Cast';
+                        castSession = null;
+                    },
+                    function(err) {
+                        console.error('Error stopping cast session:', err);
+                    }
+                );
+            }
+        }
+
+        // Initialize Cast API on page load
+        initCastApi();
+
+        // ─── Event listeners ────────────────────────────────────────────────────────
+        document.addEventListener('click', e => {
+            const link = e.target.closest('.ep-link');
+            if (!link) return;
+            e.preventDefault();
+            openEpisode(parseInt(link.dataset.index));
+        });
+
+        btnPrev.addEventListener('click', () => { if (currentEp > 0) openEpisode(currentEp - 1); });
+        btnNext.addEventListener('click', () => { if (currentEp < total - 1) openEpisode(currentEp + 1); });
+        downloadBtn.addEventListener('click', downloadEpisode);
+        qualityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateVideoQuality(btn.dataset.quality);
+            });
+        });
+        castBtn.addEventListener('click', castEpisode);
+        btnClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // ─── Theme toggle ────────────────────────────────────────────────────────────
+        var themeBtn = document.getElementById('themeToggle');
+        var htmlEl = document.documentElement;
+        themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+        themeBtn.addEventListener('click', function () {
+            var next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', next);
+            localStorage.setItem('animeTheme', next);
+            themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+
+</body>
+
+</html>

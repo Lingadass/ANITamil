@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>αηιмєѕ தமிழ் — Stream Anime in Tamil</title>
+  <meta name="description"
+    content="Watch your favourite anime dubbed & subbed in Tamil. High-quality streaming for free.">
+  <link rel="stylesheet" href="style.css">
+  <script>/* apply saved theme before paint to prevent flash */
+    (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
+  </script>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">☀️</button>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-wrapper">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>αηιмєѕ தமிழ்</h1>
+      <p>Watch the best anime — dubbed &amp; subbed in Tamil 🎌</p>
+      <p class="hero-subtitle">Explore thousands of episodes in your favorite language</p>
+    </section>
+
+    <!-- SEARCH BAR -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="animeSearch" class="search-input" placeholder="Search anime…" autocomplete="off"
+          spellcheck="false">
+        <button class="search-clear" id="searchClear" title="Clear" aria-label="Clear search">✕</button>
+      </div>
+      <p class="search-no-results" id="searchNoResults">
+        No anime found for "<span id="searchQuery"></span>" 😢
+      </p>
+    </div>
+
+    <!-- ANIME GRID -->
+    <div class="anime-grid" id="animeGrid">
+
+      <a href="JJKS3.html" class="anime-card">
+        <img src="jjks3.jpg" alt="To Be Hero X cover">
+        <div class="card-body">
+          <div class="card-title">Jujutsu Kaisen Season 3</div>
+          <span class="card-badge">Season 1 • 24 Episodes</span>
+        </div>
+      </a>
+
+      <a href="TBH X.html" class="anime-card">
+        <img src="tbhx.png" alt="To Be Hero X cover">
+        <div class="card-body">
+          <div class="card-title">To Be Hero X</div>
+          <span class="card-badge">Season 1 • 24 Episodes</span>
+        </div>
+      </a>
+
+      <a href="sololeveling.html" class="anime-card">
+        <img src="solo leveling.jpg" alt="Solo Leveling cover">
+        <div class="card-body">
+          <div class="card-title">Solo Leveling</div>
+          <div class="card-badge">
+            <div>Season 1 • 12 Episodes</div>
+            <div>Season 2 • 13 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="kaijuno 8.html" class="anime-card">
+        <img src="kaiju.jpg" alt="Kaiju No. 8 cover">
+        <div class="card-body">
+          <div class="card-title">Kaiju No. 8</div>
+          <div class="card-badge">
+            <div>Season 1 • 12 Episodes</div>
+            <div>Season 2 • 11 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="Haikyuu.html" class="anime-card">
+        <img src="haikyuu.webp" alt="Haikyuu!! cover">
+        <div class="card-body">
+          <div class="card-title">Haikyuu!!</div>
+          <div class="card-badge">
+            <div>Season 1 • 25 Episodes</div>
+            <div>Season 2 • 25 Episodes</div>
+            <div>Season 3 • 10 Episodes</div>
+            <div>Season 4 • 13 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="Blue Lock.html" class="anime-card">
+        <img src="bluelock.jpg" alt="Blue Lock cover">
+        <div class="card-body">
+          <div class="card-title">Blue Lock</div>
+          <div class="card-badge">
+            <div>Season 1 • 24 Episodes</div>
+            <div>Season 2 • 14 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="Dr Stone.html" class="anime-card">
+        <img src="drstone.jpg" alt="Dr Stone cover">
+        <div class="card-body">
+          <div class="card-title">Dr Stone</div>
+          <div class="card-badge">
+            <div>Season 1 • 24 Episodes</div>
+            <div>Season 2 • 11 Episodes</div>
+            <div>Season 3 • 22 Episodes</div>
+            <div>Season 4 • 25 Episodes</div>
+
+          </div>
+        </div>
+      </a>
+
+
+      <!-- Placeholder cards (add more shows here) -->
+      <div class="anime-card coming-soon">
+        <div class="coming-soon-placeholder">
+          <span class="coming-soon-emoji">🎞️</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title coming-soon-title-purple">Coming Soon</div>
+          <span class="card-badge">Stay Tuned</span>
+        </div>
+      </div>
+
+      <div class="anime-card coming-soon">
+        <div class="coming-soon-placeholder">
+          <span class="coming-soon-emoji delay">📺</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title coming-soon-title-red">Coming Soon</div>
+          <span class="card-badge">Stay Tuned</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
+    <p class="copyright">&copy; 2026 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized
+      reproduction or distribution is prohibited.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('animeSearch');
+    const searchClear = document.getElementById('searchClear');
+    const noResults = document.getElementById('searchNoResults');
+    const searchQuery = document.getElementById('searchQuery');
+
+    // Only real anime cards (those with an href) are searchable
+    const cards = Array.from(document.querySelectorAll('#animeGrid .anime-card[href]'));
+
+    function filterCards() {
+      const q = searchInput.value.trim().toLowerCase();
+      searchClear.style.display = q ? 'flex' : 'none';
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        const match = title.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      if (q && visibleCount === 0) {
+        noResults.style.display = 'block';
+        searchQuery.textContent = searchInput.value.trim();
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    searchInput.addEventListener('input', filterCards);
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      filterCards();
+    });
+
+    // Initialise
+    filterCards();
+
+    // ─── Theme toggle ────────────────────────────────────────────────────────
+    var themeBtn = document.getElementById('themeToggle');
+    var htmlEl = document.documentElement;
+    themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+    themeBtn.addEventListener('click', function () {
+      var next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      htmlEl.setAttribute('data-theme', next);
+      localStorage.setItem('animeTheme', next);
+      themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+
+</body>
+
+</html>

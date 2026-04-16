@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen Season 3 — αηιмєѕ தமிழ்</title>
+    <meta name="description" content="Watch Jujutsu Kaisen Season 3 all episodes in Tamil on αηιмєѕ தமிழ்.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script>/* apply saved theme before paint */
+        (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
+    </script>
+    <style>
+        /* ====== VIDEO MODAL ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(10, 10, 20, 0.92);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            position: relative;
+            width: 92vw;
+            max-width: 900px;
+            background: linear-gradient(145deg, #0f1e3a, #1a1a2e);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(135, 206, 235, 0.15), 0 24px 80px rgba(0, 0, 0, 0.7);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(135, 206, 235, 0.06);
+            border-bottom: 1px solid rgba(135, 206, 235, 0.15);
+        }
+
+        .modal-ep-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--sky-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .modal-close {
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid var(--light-red);
+            color: var(--light-red);
+            font-size: 1.1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: var(--light-red);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
+        }
+
+        .modal-video-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+        }
+
+        .modal-video-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(176, 108, 245, 0.05);
+            border-top: 1px solid rgba(176, 108, 245, 0.15);
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .modal-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Outfit', Arial, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .btn-prev {
+            background: rgba(176, 108, 245, 0.15);
+            color: var(--purple);
+            border: 1px solid var(--purple);
+        }
+
+        .btn-prev:hover {
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(176, 108, 245, 0.4);
+        }
+
+        .btn-next {
+            background: rgba(135, 206, 235, 0.15);
+            color: var(--sky-blue);
+            border: 1px solid var(--sky-blue);
+        }
+
+        .btn-next:hover {
+            background: var(--sky-blue-dark);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(135, 206, 235, 0.4);
+        }
+
+        .btn-prev:disabled,
+        .btn-next:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .modal-ep-counter {
+            font-size: 0.82rem;
+            color: rgba(135, 206, 235, 0.6);
+            text-align: center;
+            flex: 1;
+        }
+
+        /* ====== QUALITY SELECTOR ====== */
+        .quality-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px;
+            background: rgba(135, 206, 235, 0.1);
+            border: 1px solid rgba(135, 206, 235, 0.2);
+            border-radius: 8px;
+        }
+
+        .quality-btn {
+            padding: 6px 12px;
+            background: transparent;
+            border: none;
+            color: rgba(135, 206, 235, 0.6);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quality-btn:hover {
+            color: var(--sky-blue);
+        }
+
+        .quality-btn.active {
+            background: var(--sky-blue);
+            color: #000;
+            box-shadow: 0 0 12px rgba(135, 206, 235, 0.4);
+        }
+
+        /* ====== DOWNLOAD BUTTON ====== */
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid var(--light-red);
+            color: var(--light-red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        .download-btn:hover {
+            background: var(--light-red);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(255, 107, 107, 0.3);
+        }
+
+        .download-btn:active {
+            transform: scale(0.95);
+        }
+
+        .download-btn.loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .cast-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(135, 206, 235, 0.15);
+            border: 1px solid var(--sky-blue);
+            color: var(--sky-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+
+        .cast-btn:hover {
+            background: var(--sky-blue);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(135, 206, 235, 0.3);
+        }
+
+        .cast-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cast-btn.casting {
+            opacity: 0.6;
+        }
+
+        /* Active episode highlight */
+        .ep-link.ep-active {
+            background: rgba(135, 206, 235, 0.12) !important;
+            border-color: var(--sky-blue) !important;
+            color: var(--sky-blue) !important;
+        }
+
+        .ep-link.ep-active::before {
+            opacity: 1 !important;
+        }
+
+        .ep-link.ep-active .ep-icon {
+            opacity: 1 !important;
+        }
+
+        /* ====== SEASON ACCORDION ====== */
+        .seasons-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .season-block {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-purple);
+            background: rgba(15, 52, 96, 0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .season-block.open {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 24px rgba(135, 206, 235, 0.1);
+        }
+
+        .season-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            background: rgba(15, 52, 96, 0.45);
+            transition: background 0.25s ease;
+            gap: 16px;
+        }
+
+        .season-header:hover {
+            background: rgba(135, 206, 235, 0.08);
+        }
+
+        .season-header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .season-num-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .season-header-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--sky-blue);
+            margin-bottom: 3px;
+        }
+
+        .season-header-meta {
+            font-size: 0.8rem;
+            color: rgba(135, 206, 235, 0.55);
+        }
+
+        .season-chevron {
+            font-size: 1rem;
+            color: var(--purple);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .season-block.open .season-chevron {
+            transform: rotate(180deg);
+        }
+
+        .season-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .season-block.open .season-body {
+            max-height: 2000px;
+        }
+
+        .season-body-inner {
+            padding: 4px 16px 16px;
+        }
+
+        /* Season body layout: image + episodes side by side */
+        .season-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .season-cover {
+            width: 140px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--border-purple);
+            box-shadow: 0 0 20px rgba(176, 108, 245, 0.2), 0 8px 24px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+        }
+
+        .season-cover img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .season-block.open .season-cover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 0 28px rgba(135, 206, 235, 0.25), 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .season-episodes {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 600px) {
+            .season-content {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .season-cover {
+                width: 100%;
+                position: static;
+            }
+
+            .season-cover img {
+                max-height: 180px;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .season-header {
+                padding: 14px 16px;
+            }
+
+            .season-body-inner {
+                padding: 4px 10px 12px;
+            }
+
+            .season-num-badge {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+
+            .season-header-title {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== VIDEO MODAL ===== -->
+    <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalEpTitle">
+        <div class="modal-box">
+            <div class="modal-topbar">
+                <div class="modal-ep-title" id="modalEpTitle">Episode</div>
+                <button class="modal-close" id="modalClose" title="Close (Esc)">✕</button>
+            </div>
+            <div class="modal-video-wrap">
+                <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+            </div>
+            <div class="modal-controls">
+                <button class="modal-nav-btn btn-prev" id="btnPrev">◀ Previous</button>
+                <div class="quality-selector" id="qualitySelector">
+                    <button class="quality-btn active" data-quality="720p">720p</button>
+                    <button class="quality-btn" data-quality="480p">480p</button>
+                    <button class="quality-btn" data-quality="360p">360p</button>
+                </div>
+                <div class="modal-ep-counter" id="epCounter">1 / 9</div>
+                <button class="download-btn" id="downloadBtn" title="Download current episode">
+                    ⬇ Download
+                </button>
+                <button class="cast-btn" id="castBtn" title="Cast to device">📺 Cast</button>
+                <button class="modal-nav-btn btn-next" id="btnNext">Next ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
+        <ul class="nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">☀️</button>
+    </nav>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <div class="page-wrapper">
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <!-- SHOW HEADER -->
+        <div class="show-header">
+            <img src="jjks3.jpg" alt="Jujutsu Kaisen Season 3">
+            <div class="show-info">
+                <h1>JUJUTSU KAISEN SEASON 3</h1>
+                <p>
+                    Season 3 &nbsp;•&nbsp; 9 Episodes &nbsp;•&nbsp; 2026
+                </p>
+                <div class="genre-tags">
+                    <span class="genre-tag action">Action</span>
+                    <span class="genre-tag anime">Anime</span>
+                    <span class="genre-tag hero">Shounen</span>
+                </div>
+                <p class="show-description">
+                    Choose a season below, then click any episode to watch it right here. 🎬
+                </p>
+            </div>
+        </div>
+
+        <!-- SEASON SECTION TITLE -->
+        <div class="section-title">Seasons</div>
+
+        <!-- SEASON ACCORDION -->
+        <div class="seasons-wrap">
+
+            <!-- Season 3 block -->
+            <div class="season-block" id="block-s3">
+                <div class="season-header" id="hdr-s3" role="button" aria-expanded="false" aria-controls="body-s3">
+                    <div class="season-header-left">
+                        <div class="season-num-badge">3</div>
+                        <div>
+                            <div class="season-header-title">Season 3</div>
+                            <div class="season-header-meta">9 Episodes &nbsp;·&nbsp; 2026</div>
+                        </div>
+                    </div>
+                    <span class="season-chevron">▼</span>
+                </div>
+                <div class="season-body" id="body-s3">
+                    <div class="season-body-inner">
+                        <div class="season-content">
+                            <div class="season-cover">
+                                <img src="jjks3.jpg" alt="Jujutsu Kaisen Season 3">
+                            </div>
+                            <div class="season-episodes">
+                                <ul class="episode-list" id="episodeList"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
+        <p class="copyright">&copy; 2026 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized
+            reproduction or distribution is prohibited.</p>
+    </footer>
+
+    <script>
+        // ─── Episode data with multiple quality options ──────────────────────────
+        const episodes = [
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 1',
+                qualities: {
+                    '720p': '1ni_G0Oe1KCDQlX5h09XZVtr2wXvZZKAc',
+                    '480p': '10Kfra3SlPDcDZEaqt_16jdudp21EO2KB',
+                    '360p': '1htWBmRU5avuQUTq0tLWltP8pdJg1na3r'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 2',
+                qualities: {
+                    '720p': '1vHqnT3H7HDOtqEr1rB0ikAeJYn5yrOZS',
+                    '480p': '1DMEDyIkDN0Q0kDpMy8GMheOhuNaURt_o',
+                    '360p': '1uUf4aQSmcqlyLuptzXhkQMXIO-ezj3yl'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 3',
+                qualities: {
+                    '720p': '1ItHb0RLCNcj0u20IOOIFqItU2-C0SfKZ',
+                    '480p': '1kcTKomRymmZXkpHocSrpo24xtUE03zcZ',
+                    '360p': '1qmKaffReJZRVHK5d0J41sX0OJqirkPjY'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 4',
+                qualities: {
+                    '720p': '1ni_G0Oe1KCDQlX5h09XZVtr2wXvZZKAc',
+                    '480p': '10Kfra3SlPDcDZEaqt_16jdudp21EO2KB',
+                    '360p': '1htWBmRU5avuQUTq0tLWltP8pdJg1na3r'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 5',
+                qualities: {
+                    '720p': '1vHqnT3H7HDOtqEr1rB0ikAeJYn5yrOZS',
+                    '480p': '1DMEDyIkDN0Q0kDpMy8GMheOhuNaURt_o',
+                    '360p': '1uUf4aQSmcqlyLuptzXhkQMXIO-ezj3yl'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 6',
+                qualities: {
+                    '720p': '1ItHb0RLCNcj0u20IOOIFqItU2-C0SfKZ',
+                    '480p': '1kcTKomRymmZXkpHocSrpo24xtUE03zcZ',
+                    '360p': '1qmKaffReJZRVHK5d0J41sX0OJqirkPjY'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 7',
+                qualities: {
+                    '720p': '1ni_G0Oe1KCDQlX5h09XZVtr2wXvZZKAc',
+                    '480p': '10Kfra3SlPDcDZEaqt_16jdudp21EO2KB',
+                    '360p': '1htWBmRU5avuQUTq0tLWltP8pdJg1na3r'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 8',
+                qualities: {
+                    '720p': '1vHqnT3H7HDOtqEr1rB0ikAeJYn5yrOZS',
+                    '480p': '1DMEDyIkDN0Q0kDpMy8GMheOhuNaURt_o',
+                    '360p': '1uUf4aQSmcqlyLuptzXhkQMXIO-ezj3yl'
+                }
+            },
+            { 
+                title: 'Jujutsu Kaisen — Season 3 Episode 9',
+                qualities: {
+                    '720p': '1ItHb0RLCNcj0u20IOOIFqItU2-C0SfKZ',
+                    '480p': '1kcTKomRymmZXkpHocSrpo24xtUE03zcZ',
+                    '360p': '1qmKaffReJZRVHK5d0J41sX0OJqirkPjY'
+                }
+            },
+        ];
+
+        const total = episodes.length;
+        let currentEp = 0;
+        let currentQuality = '720p';
+
+        // ─── Build episode list ────────────────────────────────────────────────────
+        const list = document.getElementById('episodeList');
+        episodes.forEach((ep, i) => {
+            const epNum = String(i + 1).padStart(2, '0');
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <a href="#" class="ep-link" data-index="${i}" id="ep-${i}">
+                    <span class="ep-number">${epNum}</span>
+                    Jujutsu Kaisen — Season 3 Episode ${i + 1}
+                    <span class="ep-icon">▶</span>
+                </a>`;
+            list.appendChild(li);
+        });
+
+        // ─── Season accordion toggle ───────────────────────────────────────────────
+        document.getElementById('hdr-s3').addEventListener('click', () => {
+            const block = document.getElementById('block-s3');
+            const hdr   = document.getElementById('hdr-s3');
+            const isOpen = block.classList.contains('open');
+            block.classList.toggle('open', !isOpen);
+            hdr.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        // ─── Modal elements ────────────────────────────────────────────────────────
+        const modal          = document.getElementById('videoModal');
+        const iframe         = document.getElementById('modalIframe');
+        const modalTitle     = document.getElementById('modalEpTitle');
+        const epCounter      = document.getElementById('epCounter');
+        const btnPrev        = document.getElementById('btnPrev');
+        const btnNext        = document.getElementById('btnNext');
+        const btnClose       = document.getElementById('modalClose');
+        const qualityBtns    = document.querySelectorAll('.quality-btn');
+        const downloadBtn    = document.getElementById('downloadBtn');
+        const castBtn        = document.getElementById('castBtn');
+        let castSession      = null;
+
+        function embedUrl(fileId) {
+            return `https://drive.google.com/file/d/${fileId}/preview`;
+        }
+
+        function updateVideoQuality(quality) {
+            currentQuality = quality;
+            const ep = episodes[currentEp];
+            const fileId = ep.qualities[quality];
+            iframe.src = embedUrl(fileId);
+            
+            // Update active quality button
+            qualityBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-quality="${quality}"]`).classList.add('active');
+        }
+
+        function openEpisode(index) {
+            currentEp = index;
+            currentQuality = '720p';
+            const ep = episodes[index];
+            modalTitle.textContent = ep.title;
+            epCounter.textContent  = `${index + 1} / ${total}`;
+            
+            const fileId = ep.qualities['720p'];
+            iframe.src = embedUrl(fileId);
+            
+            btnPrev.disabled = index === 0;
+            btnNext.disabled = index === total - 1;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+            const activeLink = document.getElementById(`ep-${index}`);
+            if (activeLink) activeLink.classList.add('ep-active');
+            
+            // Reset quality buttons
+            qualityBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-quality="720p"]').classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+            document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+        }
+
+        function downloadEpisode() {
+            const ep = episodes[currentEp];
+            const fileId = ep.qualities[currentQuality];
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            downloadBtn.classList.add('loading');
+            downloadBtn.textContent = '⏳ Preparing...';
+            downloadBtn.disabled = true;
+            
+            // Open download link
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.target = '_blank';
+            a.click();
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                downloadBtn.classList.remove('loading');
+                downloadBtn.textContent = '⬇ Download';
+                downloadBtn.disabled = false;
+            }, 2000);
+        }
+
+        // ─── Cast/Chromecast functionality ─────────────────────────────────────────
+        function initCastApi() {
+            window['__onGCastApiAvailable'] = function(isAvailable) {
+                if (isAvailable) {
+                    cast.framework.CastContext.getInstance().setOptions({
+                        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                        autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+                    });
+                }
+            };
+        }
+
+        function castEpisode() {
+            if (!castSession) {
+                castBtn.classList.add('casting');
+                castBtn.textContent = '📺 Connecting...';
+                
+                const castContext = cast.framework.CastContext.getInstance();
+                castContext.requestSession().then(
+                    function(session) {
+                        castSession = session;
+                        const ep = episodes[currentEp];
+                        const fileId = ep.qualities[currentQuality];
+                        const videoUrl = embedUrl(fileId);
+                        
+                        const mediaInfo = new chrome.cast.media.MediaInfo(videoUrl, 'video/mp4');
+                        const request = new chrome.cast.media.LoadRequest(mediaInfo);
+                        request.autoplay = true;
+                        
+                        castSession.loadMedia(request).then(
+                            function() {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Casting...';
+                                console.log('Video casting started');
+                            },
+                            function(err) {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Cast';
+                                console.error('Error casting video:', err);
+                            }
+                        );
+                        
+                        castSession.addUpdateListener(function() {
+                            if (castSession.isMediaLoaded === false) {
+                                castBtn.classList.remove('casting');
+                                castBtn.textContent = '📺 Cast';
+                                castSession = null;
+                            }
+                        });
+                    },
+                    function(err) {
+                        castBtn.classList.remove('casting');
+                        castBtn.textContent = '📺 Cast';
+                        console.error('Error initializing cast session:', err);
+                    }
+                );
+            } else {
+                // Stop casting if already casting
+                castSession.stop(
+                    function() {
+                        castBtn.classList.remove('casting');
+                        castBtn.textContent = '📺 Cast';
+                        castSession = null;
+                    },
+                    function(err) {
+                        console.error('Error stopping cast session:', err);
+                    }
+                );
+            }
+        }
+
+        // Initialize Cast API on page load
+        initCastApi();
+
+        // ─── Event listeners ──────────────────────────────────────────────────
+        list.addEventListener('click', e => {
+            const link = e.target.closest('.ep-link');
+            if (!link) return;
+            e.preventDefault();
+            openEpisode(parseInt(link.dataset.index));
+        });
+
+        qualityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateVideoQuality(btn.dataset.quality);
+            });
+        });
+
+        downloadBtn.addEventListener('click', downloadEpisode);
+        castBtn.addEventListener('click', castEpisode);
+        btnPrev.addEventListener('click', () => { if (currentEp > 0) openEpisode(currentEp - 1); });
+        btnNext.addEventListener('click', () => { if (currentEp < total - 1) openEpisode(currentEp + 1); });
+        btnClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // ─── Theme toggle ─────────────────────────────────────────────────────────
+        var themeBtn = document.getElementById('themeToggle');
+        var htmlEl   = document.documentElement;
+        themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+        themeBtn.addEventListener('click', function () {
+            var next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', next);
+            localStorage.setItem('animeTheme', next);
+            themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+
+</body>
+
+</html>
