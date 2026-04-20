@@ -88,6 +88,7 @@ body::before {
   border-bottom: 2px solid var(--border-sky);
   box-shadow: 0 4px 30px rgba(135, 206, 235, 0.08);
   gap: 12px;
+  will-change: transform;
 }
 
 .navbar .logo {
@@ -196,13 +197,10 @@ body::before {
 }
 
 /* ===== KEYFRAME ANIMATIONS ===== */
+/* Use opacity-based pulse — GPU-friendly, no filter repaint */
 @keyframes titlePulse {
-  0%, 100% {
-    filter: brightness(1) drop-shadow(0 0 0px rgba(135, 206, 235, 0));
-  }
-  50% {
-    filter: brightness(1.15) drop-shadow(0 0 20px rgba(135, 206, 235, 0.4));
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.82; }
 }
 
 @keyframes slideInDown {
@@ -254,6 +252,7 @@ body::before {
   text-shadow: none;
   animation: titlePulse 3s ease-in-out infinite;
   line-height: 1.15;
+  will-change: opacity;
 }
 
 .hero p {
@@ -296,13 +295,16 @@ body::before {
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: scaleIn 0.6s ease-out;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 
 .anime-card::after {
@@ -1084,6 +1086,7 @@ footer span {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  contain: layout;
 }
 
 .season-block {
@@ -1161,13 +1164,18 @@ footer span {
 }
 
 .season-body {
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.season-body > .season-body-inner {
   overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 0;
 }
 
 .season-block.open .season-body {
-  max-height: 4000px;
+  grid-template-rows: 1fr;
 }
 
 .season-body-inner {
@@ -1650,23 +1658,42 @@ footer span {
 }
 
 /* =====================================================
-   THEME TRANSITIONS — smooth without conflict
+   THEME TRANSITIONS — smooth colour changes only
+   (keep transform transitions separate to avoid jank)
    ===================================================== */
-body,
-.navbar,
-.anime-card,
-.episode-list li a,
-.search-box,
-.back-link,
-footer,
-.section-title,
+body {
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+.navbar {
+  transition: background 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.episode-list li a {
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease;
+}
+
+.search-box {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.back-link {
+  transition: background 0.3s ease, box-shadow 0.3s ease,
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
+}
+
+footer {
+  transition: background 0.4s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.section-title {
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
 .show-header img {
-  transition:
-    background 0.4s ease,
-    background-color 0.4s ease,
-    color 0.4s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
 }
 
 /* =====================================================
@@ -1697,36 +1724,18 @@ html[data-theme="light"] body {
   background-color: var(--bg-primary);
 }
 
+/* Static light-theme gradient background — no animation to keep it smooth */
 html[data-theme="light"] body::before {
   background:
-    radial-gradient(ellipse at 12% 18%, rgba(14, 165, 233, 0.22) 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 12%, rgba(239, 68, 68, 0.13) 0%, transparent 45%),
-    radial-gradient(ellipse at 50% 88%, rgba(139, 92, 246, 0.12) 0%, transparent 55%);
-  animation: lightBlob1 9s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 12% 18%, rgba(14, 165, 233, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 12%, rgba(239, 68, 68, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 88%, rgba(139, 92, 246, 0.1) 0%, transparent 55%);
+  animation: none;
 }
 
-@keyframes lightBlob1 {
-  0%   { opacity: 1; transform: scale(1) translateX(0px); }
-  50%  { opacity: 0.8; transform: scale(1.08) translateX(18px); }
-  100% { opacity: 1; transform: scale(1.04) translateX(-8px); }
-}
-
+/* Remove the extra blob layer for light theme — it was causing full-page repaints */
 html[data-theme="light"] body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 78% 72%, rgba(14, 165, 233, 0.12) 0%, transparent 38%),
-    radial-gradient(ellipse at 18% 82%, rgba(239, 68, 68, 0.08) 0%, transparent 38%),
-    radial-gradient(ellipse at 92% 48%, rgba(139, 92, 246, 0.08) 0%, transparent 38%);
-  pointer-events: none;
-  z-index: 0;
-  animation: lightBlob2 12s ease-in-out infinite alternate;
-}
-
-@keyframes lightBlob2 {
-  0%   { transform: scale(1) translateY(0px); }
-  100% { transform: scale(1.14) translateY(22px); }
+  display: none;
 }
 
 html[data-theme="light"] .navbar {

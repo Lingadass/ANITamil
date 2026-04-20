@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -394,30 +394,38 @@
 
         function downloadEpisode() {
             const ep = allEpisodes[currentEp];
-            let urlToDL = ep.url;
-            
-            // Extract Google Drive file ID from sharing URL
+
+            // Extract Google Drive file ID
             const match = ep.url.match(/\/file\/d\/([^\/]+)\//);
-            if (match && match[1]) {
-                urlToDL = `https://drive.google.com/uc?export=download&id=${match[1]}`;
+            if (!match || !match[1]) {
+                alert('Download link not available for this episode.');
+                return;
             }
-            
+
+            const fileId = match[1];
+            // Use drive.usercontent.google.com with confirm=t to bypass the
+            // antivirus-scan redirect page and start the download directly.
+            const downloadUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download&authuser=0&confirm=t`;
+
             downloadBtn.classList.add('loading');
-            downloadBtn.textContent = '⏳ Preparing...';
+            downloadBtn.textContent = '⏳ Starting...';
             downloadBtn.disabled = true;
-            
-            // Open download link
+
+            // Create a hidden <a> with the download attribute so the browser
+            // saves the file instead of navigating away.
             const a = document.createElement('a');
-            a.href = urlToDL;
-            a.target = '_blank';
+            a.href = downloadUrl;
+            a.download = ep.label.replace(/[^\w\s\-\.]/g, '') + '.mp4';
+            document.body.appendChild(a);
             a.click();
-            
-            // Reset button after 2 seconds
+            document.body.removeChild(a);
+
+            // Reset button after 3 seconds
             setTimeout(() => {
                 downloadBtn.classList.remove('loading');
                 downloadBtn.textContent = '⬇ Download';
                 downloadBtn.disabled = false;
-            }, 2000);
+            }, 3000);
         }
 
 
