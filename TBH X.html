@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -231,24 +231,30 @@
 
         function downloadEpisode() {
             const ep = episodes[currentEp];
-            const downloadUrl = `https://drive.google.com/uc?export=download&id=${ep.id}`;
-            
+
+            // Use drive.usercontent.google.com with confirm=t to bypass the
+            // antivirus-scan redirect page and start the download directly.
+            const downloadUrl = `https://drive.usercontent.google.com/download?id=${ep.id}&export=download&authuser=0&confirm=t`;
+
             downloadBtn.classList.add('loading');
-            downloadBtn.textContent = '⏳ Preparing...';
+            downloadBtn.textContent = '⏳ Starting...';
             downloadBtn.disabled = true;
-            
-            // Open download link
+
+            // Create a hidden <a> with the download attribute so the browser
+            // saves the file instead of navigating away.
             const a = document.createElement('a');
             a.href = downloadUrl;
-            a.target = '_blank';
+            a.download = `To Be Hero X — Season 1 Episode ${currentEp + 1}.mp4`;
+            document.body.appendChild(a);
             a.click();
-            
-            // Reset button after 2 seconds
+            document.body.removeChild(a);
+
+            // Reset button after 3 seconds
             setTimeout(() => {
                 downloadBtn.classList.remove('loading');
                 downloadBtn.textContent = '⬇ Download';
                 downloadBtn.disabled = false;
-            }, 2000);
+            }, 3000);
         }
 
         function closeModal() {
