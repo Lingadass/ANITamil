@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,460 +7,13 @@
     <title>Solo Leveling — αηιмєѕ தமிழ்</title>
     <meta name="description" content="Watch Solo Leveling Season 1 & Season 2 all episodes in Tamil on αηιмєѕ தமிழ்.">
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
     <script>/* apply saved theme before paint */
         (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
     </script>
-    <style>
-        /* ====== VIDEO MODAL ====== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            background: rgba(10, 10, 20, 0.92);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-box {
-            position: relative;
-            width: 92vw;
-            max-width: 900px;
-            background: linear-gradient(145deg, #0f1e3a, #1a1a2e);
-            border: 1px solid rgba(135, 206, 235, 0.3);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(135, 206, 235, 0.15), 0 24px 80px rgba(0, 0, 0, 0.7);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            background: rgba(135, 206, 235, 0.06);
-            border-bottom: 1px solid rgba(135, 206, 235, 0.15);
-        }
-
-        .modal-ep-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--sky-blue);
-            letter-spacing: 0.5px;
-        }
-
-        .modal-close {
-            background: rgba(255, 107, 107, 0.15);
-            border: 1px solid var(--light-red);
-            color: var(--light-red);
-            font-size: 1.1rem;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .modal-close:hover {
-            background: var(--light-red);
-            color: #fff;
-            box-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
-        }
-
-        .modal-video-wrap {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            background: #000;
-        }
-
-        .modal-video-wrap iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .modal-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 20px;
-            background: rgba(176, 108, 245, 0.05);
-            border-top: 1px solid rgba(176, 108, 245, 0.15);
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .modal-nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Outfit', Arial, sans-serif;
-            font-size: 0.88rem;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-
-        .btn-prev {
-            background: rgba(176, 108, 245, 0.15);
-            color: var(--purple);
-            border: 1px solid var(--purple);
-        }
-
-        .btn-prev:hover {
-            background: var(--purple);
-            color: #fff;
-            box-shadow: 0 0 16px rgba(176, 108, 245, 0.4);
-        }
-
-        .btn-next {
-            background: rgba(135, 206, 235, 0.15);
-            color: var(--sky-blue);
-            border: 1px solid var(--sky-blue);
-        }
-
-        .btn-next:hover {
-            background: var(--sky-blue-dark);
-            color: #fff;
-            box-shadow: 0 0 16px rgba(135, 206, 235, 0.4);
-        }
-
-        .btn-prev:disabled,
-        .btn-next:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .modal-ep-counter {
-            font-size: 0.82rem;
-            color: rgba(135, 206, 235, 0.6);
-            text-align: center;
-            flex: 1;
-        }
-
-        /* ====== QUALITY SELECTOR ====== */
-        .quality-selector {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 2px;
-            background: rgba(135, 206, 235, 0.1);
-            border: 1px solid rgba(135, 206, 235, 0.2);
-            border-radius: 8px;
-        }
-
-        .quality-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: none;
-            color: rgba(135, 206, 235, 0.6);
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .quality-btn:hover {
-            color: var(--sky-blue);
-        }
-
-        .quality-btn.active {
-            background: var(--sky-blue);
-            color: #000;
-            box-shadow: 0 0 12px rgba(135, 206, 235, 0.4);
-        }
-
-        /* ====== DOWNLOAD BUTTON ====== */
-        .download-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: rgba(255, 107, 107, 0.15);
-            border: 1px solid var(--light-red);
-            color: var(--light-red);
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Outfit', Arial, sans-serif;
-        }
-
-        .download-btn:hover {
-            background: var(--light-red);
-            color: #fff;
-            box-shadow: 0 0 16px rgba(255, 107, 107, 0.3);
-        }
-
-        .download-btn:active {
-            transform: scale(0.95);
-        }
-
-        .download-btn.loading {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .cast-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            background: rgba(135, 206, 235, 0.15);
-            border: 1px solid var(--sky-blue);
-            color: var(--sky-blue);
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Outfit', Arial, sans-serif;
-        }
-
-        .cast-btn:hover {
-            background: var(--sky-blue);
-            color: #fff;
-            box-shadow: 0 0 16px rgba(135, 206, 235, 0.3);
-        }
-
-        .cast-btn:active {
-            transform: scale(0.95);
-        }
-
-        .cast-btn.casting {
-            opacity: 0.6;
-        }
-
-        /* Active episode highlight */
-        .ep-link.ep-active {
-            background: rgba(135, 206, 235, 0.12) !important;
-            border-color: var(--sky-blue) !important;
-            color: var(--sky-blue) !important;
-        }
-
-        .ep-link.ep-active::before {
-            opacity: 1 !important;
-        }
-
-        .ep-link.ep-active .ep-icon {
-            opacity: 1 !important;
-        }
-
-        /* ====== SEASON ACCORDION ====== */
-        .seasons-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .season-block {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid var(--border-purple);
-            background: rgba(15, 52, 96, 0.25);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .season-block.open {
-            border-color: var(--sky-blue);
-            box-shadow: 0 0 24px rgba(135, 206, 235, 0.1);
-        }
-
-        /* Clickable season header */
-        .season-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 22px;
-            cursor: pointer;
-            -webkit-user-select: none;
-            user-select: none;
-            background: rgba(15, 52, 96, 0.45);
-            transition: background 0.25s ease;
-            gap: 16px;
-        }
-
-        .season-header:hover {
-            background: rgba(135, 206, 235, 0.08);
-        }
-
-        .season-header-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .season-num-badge {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--purple-dark), var(--purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .season-header-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--sky-blue);
-            margin-bottom: 3px;
-        }
-
-        .season-header-meta {
-            font-size: 0.8rem;
-            color: rgba(135, 206, 235, 0.55);
-        }
-
-        .season-chevron {
-            font-size: 1rem;
-            color: var(--purple);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            flex-shrink: 0;
-        }
-
-        .season-block.open .season-chevron {
-            transform: rotate(180deg);
-        }
-
-        /* Collapsible body */
-        .season-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .season-block.open .season-body {
-            max-height: 2000px;
-            /* large enough for any episode count */
-        }
-
-        .season-body-inner {
-            padding: 4px 16px 16px;
-        }
-
-        /* ── Season body layout: image + episodes side by side ── */
-        .season-content {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .season-cover {
-            width: 140px;
-            flex-shrink: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid var(--border-purple);
-            box-shadow: 0 0 20px rgba(176, 108, 245, 0.2), 0 8px 24px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: sticky;
-            top: 80px;
-            align-self: flex-start;
-        }
-
-        .season-cover img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-        }
-
-        .season-block.open .season-cover {
-            border-color: var(--sky-blue);
-            box-shadow: 0 0 28px rgba(135, 206, 235, 0.25), 0 8px 24px rgba(0, 0, 0, 0.5);
-        }
-
-        .season-episodes {
-            flex: 1;
-            min-width: 0;
-        }
-
-        @media (max-width: 600px) {
-            .season-content {
-                flex-direction: column;
-                gap: 14px;
-            }
-
-            .season-cover {
-                width: 100%;
-                position: static;
-            }
-
-            .season-cover img {
-                max-height: 180px;
-                object-fit: cover;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .season-header {
-                padding: 14px 16px;
-            }
-
-            .season-body-inner {
-                padding: 4px 10px 12px;
-            }
-
-            .season-num-badge {
-                width: 38px;
-                height: 38px;
-                font-size: 0.95rem;
-            }
-
-            .season-header-title {
-                font-size: 0.95rem;
-            }
-        }
+        <style>
+        /* Page-specific keyframes — all other styles live in style.css */
+        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 
@@ -483,11 +36,10 @@
                     <button class="quality-btn" data-quality="480p">480p</button>
                     <button class="quality-btn" data-quality="360p">360p</button>
                 </div>
-                <div class="modal-ep-counter" id="epCounter">1 / 25</div>
+                <div class="modal-ep-counter" id="epCounter">— / 25</div>
                 <button class="download-btn" id="downloadBtn" title="Download current episode">
                     ⬇ Download
                 </button>
-                <button class="cast-btn" id="castBtn" title="Cast to device">📺 Cast</button>
                 <button class="modal-nav-btn btn-next" id="btnNext">Next ▶</button>
             </div>
         </div>
@@ -519,7 +71,7 @@
             <div class="show-info">
                 <h1>SOLO LEVELING</h1>
                 <p>
-                    2 Seasons &nbsp;•&nbsp; 25 Episodes &nbsp;•&nbsp;
+                    2 Seasons &nbsp;•&nbsp; 25 Episodes &nbsp;•&nbsp; 2024–2025
                 </p>
                 <div class="genre-tags">
                     <span class="genre-tag action">Action</span>
@@ -684,8 +236,6 @@
         const btnClose = document.getElementById('modalClose');
         const qualityBtns = document.querySelectorAll('.quality-btn');
         const downloadBtn = document.getElementById('downloadBtn');
-        const castBtn = document.getElementById('castBtn');
-        let castSession = null;
         let currentQuality = '720p';
 
         function openEpisode(index) {
@@ -744,77 +294,6 @@
             }, 2000);
         }
 
-        // ─── Cast/Chromecast functionality ─────────────────────────────────────────
-        function initCastApi() {
-            window['__onGCastApiAvailable'] = function(isAvailable) {
-                if (isAvailable) {
-                    cast.framework.CastContext.getInstance().setOptions({
-                        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
-                        autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-                    });
-                }
-            };
-        }
-
-        function castEpisode() {
-            if (!castSession) {
-                castBtn.classList.add('casting');
-                castBtn.textContent = '📺 Connecting...';
-                
-                const castContext = cast.framework.CastContext.getInstance();
-                castContext.requestSession().then(
-                    function(session) {
-                        castSession = session;
-                        const ep = allEpisodes[currentEp];
-                        
-                        const mediaInfo = new chrome.cast.media.MediaInfo(ep.url, 'video/mp4');
-                        const request = new chrome.cast.media.LoadRequest(mediaInfo);
-                        request.autoplay = true;
-                        
-                        castSession.loadMedia(request).then(
-                            function() {
-                                castBtn.classList.remove('casting');
-                                castBtn.textContent = '📺 Casting...';
-                                console.log('Video casting started');
-                            },
-                            function(err) {
-                                castBtn.classList.remove('casting');
-                                castBtn.textContent = '📺 Cast';
-                                console.error('Error casting video:', err);
-                            }
-                        );
-                        
-                        castSession.addUpdateListener(function() {
-                            if (castSession.isMediaLoaded === false) {
-                                castBtn.classList.remove('casting');
-                                castBtn.textContent = '📺 Cast';
-                                castSession = null;
-                            }
-                        });
-                    },
-                    function(err) {
-                        castBtn.classList.remove('casting');
-                        castBtn.textContent = '📺 Cast';
-                        console.error('Error initializing cast session:', err);
-                    }
-                );
-            } else {
-                // Stop casting if already casting
-                castSession.stop(
-                    function() {
-                        castBtn.classList.remove('casting');
-                        castBtn.textContent = '📺 Cast';
-                        castSession = null;
-                    },
-                    function(err) {
-                        console.error('Error stopping cast session:', err);
-                    }
-                );
-            }
-        }
-
-        // Initialize Cast API on page load
-        initCastApi();
 
         // ─── Event listeners ──────────────────────────────────────────────────────
         document.addEventListener('click', e => {
@@ -833,7 +312,6 @@
         });
 
         downloadBtn.addEventListener('click', downloadEpisode);
-        castBtn.addEventListener('click', castEpisode);
         btnPrev.addEventListener('click', () => { if (currentEp > 0) openEpisode(currentEp - 1); });
         btnNext.addEventListener('click', () => { if (currentEp < total - 1) openEpisode(currentEp + 1); });
         btnClose.addEventListener('click', closeModal);
