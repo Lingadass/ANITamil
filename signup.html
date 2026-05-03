@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - Animes தமிழ்</title>
+  <title>Sign Up - αηιмєѕ தமிழ்</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Outfit', Arial, sans-serif;
+      background: #1a1a2e;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -22,331 +20,575 @@
       padding: 20px;
     }
 
+    /* Subtle ambient glow background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at top left, rgba(135,206,235,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(176,108,245,0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Card ── */
     .auth-container {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
+      background: rgba(22, 33, 62, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(135, 206, 235, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(135,206,235,0.08);
+      max-width: 440px;
       width: 100%;
-      padding: 40px;
-      animation: slideIn 0.5s ease-out;
+      padding: 44px 40px 36px;
+      position: relative;
+      z-index: 1;
+      animation: slideIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
     }
 
     @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-28px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .auth-header {
+    /* ── Brand header ── */
+    .auth-brand {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
-    .auth-header h1 {
-      color: #333;
-      font-size: 28px;
-      margin-bottom: 10px;
+    .auth-brand h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #87ceeb, #b06cf5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
     }
 
-    .auth-header p {
-      color: #666;
-      font-size: 14px;
+    .auth-brand p {
+      color: rgba(135,206,235,0.65);
+      font-size: 0.88rem;
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+    /* ── Form fields ── */
+    .form-group { margin-bottom: 18px; }
 
     .form-group label {
       display: block;
-      margin-bottom: 8px;
-      color: #333;
+      margin-bottom: 7px;
+      color: rgba(232,232,240,0.85);
       font-weight: 600;
-      font-size: 14px;
+      font-size: 0.88rem;
+      letter-spacing: 0.3px;
     }
 
     .form-group input {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 5px;
-      font-size: 14px;
-      transition: border-color 0.3s;
-      font-family: inherit;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(135,206,235,0.25);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: #e8e8f0;
+      font-family: 'Outfit', Arial, sans-serif;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
     }
 
     .form-group input:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #87ceeb;
+      box-shadow: 0 0 0 3px rgba(135,206,235,0.14);
+      background: rgba(135,206,235,0.06);
     }
 
-    .form-group input::placeholder {
-      color: #999;
+    .form-group input::placeholder { color: rgba(232,232,240,0.35); }
+
+    /* ── Password strength bar ── */
+    .strength-wrap {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .password-strength {
-      margin-top: 5px;
+    .strength-track {
       height: 4px;
-      background: #e0e0e0;
-      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
       overflow: hidden;
     }
 
-    .password-strength-bar {
+    .strength-bar {
       height: 100%;
       width: 0%;
-      background: #ff6b6b;
-      transition: width 0.3s, background-color 0.3s;
+      border-radius: 4px;
+      transition: width 0.35s ease, background-color 0.35s ease;
     }
 
-    .submit-btn {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
+    .strength-label {
+      font-size: 0.75rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 10px;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .submit-btn:active {
-      transform: translateY(0);
-    }
-
-    .submit-btn.loading {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .auth-footer {
-      text-align: center;
-      margin-top: 20px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .auth-footer a {
-      color: #667eea;
-      text-decoration: none;
-      font-weight: 600;
+      color: rgba(232,232,240,0.45);
       transition: color 0.3s;
     }
 
-    .auth-footer a:hover {
-      color: #764ba2;
-    }
-
-    .error-message {
-      background: #fee;
-      color: #c33;
-      padding: 12px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      font-size: 13px;
+    /* ── Message banners ── */
+    .msg-banner {
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
       display: none;
+      align-items: center;
+      gap: 10px;
+      animation: bannerIn 0.3s ease;
     }
 
-    .error-message.show {
-      display: block;
+    @keyframes bannerIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .success-message {
-      background: #efe;
-      color: #3c3;
-      padding: 12px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      font-size: 13px;
+    .msg-banner.show { display: flex; }
+
+    .msg-banner.msg-error {
+      background: rgba(255,107,107,0.12);
+      border: 1.5px solid rgba(255,107,107,0.4);
+      color: #ff8a8a;
+    }
+
+    .msg-banner.msg-success {
+      background: rgba(81,207,102,0.12);
+      border: 1.5px solid rgba(81,207,102,0.4);
+      color: #6ee07a;
+    }
+
+    .msg-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── Submit button ── */
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #4fb3d9 0%, #8a4fd4 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Outfit', Arial, sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(135,206,235,0.35);
+    }
+
+    .submit-btn:active:not(:disabled) { transform: translateY(0); }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Spinner inside button */
+    .btn-spinner {
       display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
     }
 
-    .success-message.show {
-      display: block;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .divider {
+    .submit-btn.loading .btn-spinner { display: block; }
+    .submit-btn.loading .btn-text::before { content: 'Creating account…'; }
+    .submit-btn:not(.loading) .btn-text::before { content: 'Create Account'; }
+
+    /* ── Footer link ── */
+    .auth-footer {
       text-align: center;
-      margin: 20px 0;
-      color: #999;
-      font-size: 13px;
+      margin-top: 22px;
+      color: rgba(232,232,240,0.5);
+      font-size: 0.88rem;
+    }
+
+    .auth-footer a {
+      color: #87ceeb;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .auth-footer a:hover { color: #b06cf5; }
+
+    /* ── Success overlay (shown after account created) ── */
+    #successOverlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 18px;
+      padding: 10px 0;
+    }
+
+    #successOverlay .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(81,207,102,0.25), rgba(81,207,102,0.1));
+      border: 2px solid rgba(81,207,102,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    #successOverlay h2 {
+      color: #6ee07a;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    #successOverlay p {
+      color: rgba(232,232,240,0.6);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .redirect-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .redirect-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #51cf66, #87ceeb);
+      border-radius: 4px;
+      animation: drain 3s linear forwards;
+    }
+
+    @keyframes drain { from { width: 100%; } to { width: 0%; } }
+
+    .redirect-hint {
+      color: rgba(135,206,235,0.55);
+      font-size: 0.8rem;
+    }
+
+    .go-login-btn {
+      padding: 10px 28px;
+      background: rgba(135,206,235,0.12);
+      border: 1.5px solid rgba(135,206,235,0.4);
+      border-radius: 10px;
+      color: #87ceeb;
+      font-family: 'Outfit', Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .go-login-btn:hover {
+      background: rgba(135,206,235,0.22);
+      transform: translateY(-1px);
     }
   </style>
 </head>
 
 <body>
   <div class="auth-container">
-    <div class="auth-header">
+
+    <!-- ── Brand ── -->
+    <div class="auth-brand">
       <h1>αηιмєѕ தமிழ்</h1>
-      <p>Create your account</p>
+      <p>Create your free account</p>
     </div>
 
-    <div class="error-message" id="errorMessage"></div>
-    <div class="success-message" id="successMessage"></div>
+    <!-- ── Error / inline feedback banner ── -->
+    <div class="msg-banner msg-error" id="errorMessage">
+      <span class="msg-icon">⚠️</span>
+      <span id="errorText"></span>
+    </div>
 
+    <!-- ── Success banner (inline, inside form area) ── -->
+    <div class="msg-banner msg-success" id="inlineSuccess">
+      <span class="msg-icon">✅</span>
+      <span id="inlineSuccessText"></span>
+    </div>
+
+    <!-- ── Signup form ── -->
     <form id="signupForm">
+
+      <div class="form-group">
+        <label for="displayName">Display Name</label>
+        <input type="text" id="displayName" name="displayName"
+               placeholder="What should we call you?" autocomplete="name">
+      </div>
+
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email"
+               placeholder="your@email.com" required autocomplete="email">
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
-        <div class="password-strength">
-          <div class="password-strength-bar" id="strengthBar"></div>
+        <input type="password" id="password" name="password"
+               placeholder="Create a strong password" required autocomplete="new-password">
+        <!-- Password strength meter -->
+        <div class="strength-wrap">
+          <div class="strength-track">
+            <div class="strength-bar" id="strengthBar"></div>
+          </div>
+          <span class="strength-label" id="strengthLabel"></span>
         </div>
       </div>
 
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        <input type="password" id="confirmPassword" name="confirmPassword"
+               placeholder="Repeat your password" required autocomplete="new-password">
       </div>
 
-      <button type="submit" class="submit-btn" id="signupBtn">Create Account</button>
+      <button type="submit" class="submit-btn" id="signupBtn">
+        <span class="btn-spinner" id="btnSpinner"></span>
+        <span class="btn-text"></span>
+      </button>
     </form>
 
-    <div class="auth-footer">
+    <!-- ── Success overlay (replaces form after account created) ── -->
+    <div id="successOverlay">
+      <div class="success-icon">🎉</div>
+      <h2>Account Created!</h2>
+      <p>
+        Welcome to <strong>αηιмєѕ தமிழ்</strong>!<br>
+        Your account is ready. Redirecting to login…
+      </p>
+      <div class="redirect-bar-wrap">
+        <div class="redirect-bar" id="redirectBar"></div>
+      </div>
+      <span class="redirect-hint">Redirecting in 3 seconds…</span>
+      <button class="go-login-btn" id="goLoginBtn">Go to Login Now →</button>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="auth-footer" id="footerNote">
       Already have an account? <a href="login.html">Log in here</a>
     </div>
   </div>
 
   <script type="module">
-    import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from './firebase-config.js';
+    import {
+      auth,
+      db,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      setDoc,
+      doc
+    } from './firebase-config.js';
 
-    const signupForm = document.getElementById('signupForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const signupBtn = document.getElementById('signupBtn');
-    const errorMessage = document.getElementById('errorMessage');
-    const successMessage = document.getElementById('successMessage');
-    const strengthBar = document.getElementById('strengthBar');
+    // ── DOM references ────────────────────────────────────────────────────────
+    const signupForm       = document.getElementById('signupForm');
+    const displayNameInput = document.getElementById('displayName');
+    const emailInput       = document.getElementById('email');
+    const passwordInput    = document.getElementById('password');
+    const confirmInput     = document.getElementById('confirmPassword');
+    const signupBtn        = document.getElementById('signupBtn');
+    const errorBanner      = document.getElementById('errorMessage');
+    const errorText        = document.getElementById('errorText');
+    const inlineBanner     = document.getElementById('inlineSuccess');
+    const inlineSuccessText= document.getElementById('inlineSuccessText');
+    const strengthBar      = document.getElementById('strengthBar');
+    const strengthLabel    = document.getElementById('strengthLabel');
+    const successOverlay   = document.getElementById('successOverlay');
+    const footerNote       = document.getElementById('footerNote');
+    const goLoginBtn       = document.getElementById('goLoginBtn');
 
-    // Password strength indicator
+    // ── Password strength meter ───────────────────────────────────────────────
     passwordInput.addEventListener('input', function () {
-      const password = this.value;
-      let strength = 0;
-      let color = '#ff6b6b';
+      const pw = this.value;
+      let score = 0;
 
-      if (password.length >= 8) strength += 25;
-      if (password.match(/[a-z]/)) strength += 25;
-      if (password.match(/[A-Z]/)) strength += 25;
-      if (password.match(/[0-9]/)) strength += 15;
-      if (password.match(/[^a-zA-Z0-9]/)) strength += 10;
+      if (pw.length >= 8)          score += 25; // length
+      if (/[a-z]/.test(pw))        score += 20; // lowercase
+      if (/[A-Z]/.test(pw))        score += 20; // uppercase
+      if (/[0-9]/.test(pw))        score += 20; // number
+      if (/[^a-zA-Z0-9]/.test(pw)) score += 15; // special char
 
-      strengthBar.style.width = strength + '%';
+      let color, label;
+      if (score < 30)      { color = '#ff6b6b'; label = 'Weak'; }
+      else if (score < 60) { color = '#ffa500'; label = 'Fair'; }
+      else if (score < 85) { color = '#87ceeb'; label = 'Good'; }
+      else                 { color = '#51cf66'; label = 'Strong'; }
 
-      if (strength < 30) color = '#ff6b6b';
-      else if (strength < 60) color = '#ffa500';
-      else if (strength < 90) color = '#87ceeb';
-      else color = '#51cf66';
-
+      strengthBar.style.width           = score + '%';
       strengthBar.style.backgroundColor = color;
+      strengthLabel.style.color         = color;
+      strengthLabel.textContent          = pw.length ? label : '';
     });
 
+    // ── Helper: show error banner ─────────────────────────────────────────────
+    function showError(msg) {
+      // Clear any inline success
+      inlineBanner.classList.remove('show');
+
+      errorText.textContent = msg;
+      errorBanner.classList.add('show');
+
+      // Scroll banner into view on small screens
+      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ── Helper: show inline success (brief, e.g. "Firestore synced") ─────────
+    function showInlineSuccess(msg) {
+      errorBanner.classList.remove('show');
+      inlineSuccessText.textContent = msg;
+      inlineBanner.classList.add('show');
+    }
+
+    // ── Helper: set button loading state ─────────────────────────────────────
+    function setLoading(loading) {
+      signupBtn.disabled = loading;
+      signupBtn.classList.toggle('loading', loading);
+    }
+
+    // ── Helper: show full-screen success overlay ──────────────────────────────
+    function showSuccessOverlay() {
+      // Hide form + footer
+      signupForm.style.display      = 'none';
+      inlineBanner.style.display    = 'none';
+      errorBanner.style.display     = 'none';
+      footerNote.style.display      = 'none';
+
+      // Show big success state
+      successOverlay.style.display  = 'flex';
+
+      // Auto-redirect after 3 s
+      const timer = setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 3000);
+
+      // Manual redirect button
+      goLoginBtn.addEventListener('click', () => {
+        clearTimeout(timer);
+        window.location.href = 'login.html';
+      });
+    }
+
+    // ── Map Firebase error codes → friendly messages ──────────────────────────
+    function friendlyError(code) {
+      const map = {
+        'auth/email-already-in-use' : '⚠️ This email is already registered. Try logging in instead.',
+        'auth/invalid-email'        : '⚠️ That email address looks invalid. Please check it.',
+        'auth/weak-password'        : '⚠️ Password is too weak. Use at least 8 characters with numbers & symbols.',
+        'auth/network-request-failed': '⚠️ Network error. Check your internet connection and try again.',
+        'auth/operation-not-allowed': '⚠️ Email/password sign-up is not enabled. Contact support.',
+        'auth/too-many-requests'    : '⚠️ Too many attempts. Please wait a moment and try again.',
+      };
+      return map[code] || '⚠️ Something went wrong. Please try again.';
+    }
+
+    // ── Form submit handler ───────────────────────────────────────────────────
     signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      errorMessage.classList.remove('show');
-      successMessage.classList.remove('show');
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
+      // Clear previous messages
+      errorBanner.classList.remove('show');
+      inlineBanner.classList.remove('show');
 
-      // Validation
+      const name            = displayNameInput.value.trim();
+      const email           = emailInput.value.trim();
+      const password        = passwordInput.value;
+      const confirmPassword = confirmInput.value;
+
+      // ── Client-side validation ──────────────────────────────────────────
       if (!email || !password || !confirmPassword) {
-        showError('Please fill in all fields');
+        showError('Please fill in all required fields.');
         return;
       }
 
       if (password !== confirmPassword) {
-        showError('Passwords do not match');
+        showError('Passwords do not match. Please re-enter.');
+        confirmInput.focus();
         return;
       }
 
       if (password.length < 8) {
-        showError('Password must be at least 8 characters long');
+        showError('Password must be at least 8 characters long.');
+        passwordInput.focus();
         return;
       }
 
-      signupBtn.classList.add('loading');
-      signupBtn.disabled = true;
+      // ── Start loading state ─────────────────────────────────────────────
+      setLoading(true);
 
       try {
+        // Step 1: Create Firebase Auth account
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        const username = email.split('@')[0];
 
-        // Initialize user profile in Firestore
+        // Step 2: Set display name in Firebase Auth profile
+        const displayName = name || email.split('@')[0];
+        await updateProfile(user, { displayName });
+
+        // Step 3: Create Firestore user document
         try {
-          const userDocRef = doc(db, 'users', user.uid);
-          await setDoc(userDocRef, {
-            email: email,
-            displayName: username,
-            bio: '',
+          await setDoc(doc(db, 'users', user.uid), {
+            email        : email,
+            displayName  : displayName,
+            bio          : '',
             favoriteGenre: '',
             watchlistCount: 0,
-            hoursWatched: 0,
-            createdAt: new Date(),
-            lastUpdated: new Date()
+            hoursWatched : 0,
+            createdAt    : new Date(),
+            lastUpdated  : new Date()
           });
         } catch (firestoreError) {
-          console.log('Firestore profile creation note:', firestoreError);
-          // Continue even if Firestore fails (it might not be set up)
+          // Non-fatal: Firestore might not be configured yet
+          console.warn('Firestore profile note:', firestoreError.message);
         }
 
-        showSuccess('Account created successfully! Redirecting to login...');
-        signupForm.reset();
-        strengthBar.style.width = '0%';
-
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 2000);
+        // Step 4: Show success — big overlay with countdown bar
+        // This is clearly visible; user cannot miss it
+        showSuccessOverlay();
 
       } catch (error) {
-        console.error('Signup error:', error);
-        let message = 'An error occurred during signup';
-
-        if (error.code === 'auth/email-already-in-use') {
-          message = 'This email is already registered';
-        } else if (error.code === 'auth/invalid-email') {
-          message = 'Invalid email address';
-        } else if (error.code === 'auth/weak-password') {
-          message = 'Password is too weak';
-        }
-
-        showError(message);
-      } finally {
-        signupBtn.classList.remove('loading');
-        signupBtn.disabled = false;
+        // Step 5: Show meaningful error message
+        console.error('Signup error:', error.code, error.message);
+        showError(friendlyError(error.code));
+        setLoading(false); // re-enable only on failure
       }
+
+      // Note: we do NOT call setLoading(false) on success
+      // because the page is about to redirect anyway
     });
-
-    function showError(message) {
-      errorMessage.textContent = message;
-      errorMessage.classList.add('show');
-    }
-
-    function showSuccess(message) {
-      successMessage.textContent = message;
-      successMessage.classList.add('show');
-    }
   </script>
 </body>
 
