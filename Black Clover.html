@@ -10,29 +10,48 @@
     <script>/* apply saved theme before paint */
         (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
     </script>
-        <style>
+    <style>
         /* Page-specific keyframes — all other styles live in style.css */
-        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-  <!-- Auth loading overlay -->
-  <script>
-    (function(){
-      document.body.style.opacity='0';
-      var s=document.createElement('style');
-      s.textContent='@keyframes ag-spin{to{transform:rotate(360deg)}}.ag-spinner{width:44px;height:44px;border:3px solid rgba(135,206,235,.18);border-top-color:#87ceeb;border-radius:50%;animation:ag-spin .85s linear infinite}.ag-label{color:rgba(135,206,235,.7);font-family:Outfit,Arial,sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}';
-      document.head.appendChild(s);
-      var ov=document.createElement('div');
-      ov.id='authOverlay';
-      ov.style.cssText='position:fixed;inset:0;z-index:9999;background:#1a1a2e;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px';
-      ov.innerHTML='<div class="ag-spinner"></div><div class="ag-label">Loading…</div>';
-      document.body.appendChild(ov);
-    })();
-  </script>
+    <!-- Auth loading overlay -->
+    <script>
+        (function () {
+            document.body.style.opacity = '0';
+            var s = document.createElement('style');
+            s.textContent = '@keyframes ag-spin{to{transform:rotate(360deg)}}.ag-spinner{width:44px;height:44px;border:3px solid rgba(135,206,235,.18);border-top-color:#87ceeb;border-radius:50%;animation:ag-spin .85s linear infinite}.ag-label{color:rgba(135,206,235,.7);font-family:Outfit,Arial,sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}';
+            document.head.appendChild(s);
+            var ov = document.createElement('div');
+            ov.id = 'authOverlay';
+            ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#1a1a2e;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px';
+            ov.innerHTML = '<div class="ag-spinner"></div><div class="ag-label">Loading…</div>';
+            document.body.appendChild(ov);
+        })();
+    </script>
 
     <!-- ===== VIDEO MODAL ===== -->
     <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalEpTitle">
@@ -82,7 +101,7 @@
 
         <!-- SHOW HEADER -->
         <div class="show-header">
-            <img src="Black clover.jpg" alt="Black Clover cover" loading="lazy" decoding="async">
+            <img src="Black Clover.jpg" alt="Black Clover cover" loading="lazy" decoding="async">
             <div class="show-info">
                 <h1>BLACK CLOVER</h1>
                 <p>
@@ -121,7 +140,8 @@
                     <div class="season-body-inner">
                         <div class="season-content">
                             <div class="season-cover">
-                                <img src="Black Clover S1.jpg" alt="Black Clover Season 1" loading="lazy" decoding="async">
+                                <img src="Black Clover S1.jpg" alt="Black Clover Season 1" loading="lazy"
+                                    decoding="async">
                             </div>
                             <div class="season-episodes">
                                 <ul class="episode-list" id="listS1"></ul>
@@ -131,7 +151,7 @@
                 </div>
             </div>
 
-            
+
 
         </div>
 
@@ -198,8 +218,8 @@
             { label: 'Black Clover — Season 1 Episode 49', url: 'https://drive.google.com/file/d/1zWOemoixFibdqLj236k2VJsVxp9vYJTT/view?usp=drive_link' },
             { label: 'Black Clover — Season 1 Episode 50', url: 'https://drive.google.com/file/d/19eNcGR957ftd28TEfy8--QZLz8u13Xa3/view?usp=drive_link' },
             { label: 'Black Clover — Season 1 Episode 51', url: 'https://drive.google.com/file/d/1IVCrdZCVjt_2vN_iQzRdhMXT2vHn7FC3/view?usp=sharing' },
-           
-            
+
+
         ];
 
         const allEpisodes = [...season1];
@@ -269,7 +289,7 @@
             document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
             const activeLink = document.getElementById(`ep-${index}`);
             if (activeLink) activeLink.classList.add('ep-active');
-            
+
             // Reset quality buttons
             qualityBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-quality="720p"]').classList.add('active');
@@ -285,23 +305,23 @@
         function downloadEpisode() {
             const ep = allEpisodes[currentEp];
             let urlToDL = ep.url;
-            
+
             // Extract Google Drive file ID from sharing URL
             const match = ep.url.match(/\/file\/d\/([^\/]+)\//);
             if (match && match[1]) {
                 urlToDL = `https://drive.google.com/uc?export=download&id=${match[1]}`;
             }
-            
+
             downloadBtn.classList.add('loading');
             downloadBtn.textContent = '⏳ Preparing...';
             downloadBtn.disabled = true;
-            
+
             // Open download link
             const a = document.createElement('a');
             a.href = urlToDL;
             a.target = '_blank';
             a.click();
-            
+
             // Reset button after 2 seconds
             setTimeout(() => {
                 downloadBtn.classList.remove('loading');
@@ -339,7 +359,7 @@
         // ─── Hamburger menu ──────────────────────────────────────────────────────
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-        
+
         hamburger.addEventListener('click', function () {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
