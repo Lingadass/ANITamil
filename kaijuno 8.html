@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,7 +27,7 @@
                 <button class="modal-close" id="modalClose" title="Close (Esc)">✕</button>
             </div>
             <div class="modal-video-wrap">
-                <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+                <iframe id="modalIframe" title="Anime Video Player" src="" allowfullscreen allow="autoplay"></iframe>
             </div>
             <div class="modal-controls">
                 <button class="modal-nav-btn btn-prev" id="btnPrev">◀ Previous</button>
@@ -268,38 +268,30 @@
 
         function downloadEpisode() {
             const ep = allEpisodes[currentEp];
-
-            // Extract Google Drive file ID
+            let urlToDL = ep.url;
+            
+            // Extract Google Drive file ID from sharing URL
             const match = ep.url.match(/\/file\/d\/([^\/]+)\//);
-            if (!match || !match[1]) {
-                alert('Download link not available for this episode.');
-                return;
+            if (match && match[1]) {
+                urlToDL = `https://drive.google.com/uc?export=download&id=${match[1]}`;
             }
-
-            const fileId = match[1];
-            // Use drive.usercontent.google.com with confirm=t to bypass the
-            // antivirus-scan redirect page and start the download directly.
-            const downloadUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download&authuser=0&confirm=t`;
-
+            
             downloadBtn.classList.add('loading');
-            downloadBtn.textContent = '⏳ Starting...';
+            downloadBtn.textContent = '⏳ Preparing...';
             downloadBtn.disabled = true;
-
-            // Create a hidden <a> with the download attribute so the browser
-            // saves the file instead of navigating away.
+            
+            // Open download link
             const a = document.createElement('a');
-            a.href = downloadUrl;
-            a.download = ep.label.replace(/[^\w\s\-\.]/g, '') + '.mp4';
-            document.body.appendChild(a);
+            a.href = urlToDL;
+            a.target = '_blank';
             a.click();
-            document.body.removeChild(a);
-
-            // Reset button after 3 seconds
+            
+            // Reset button after 2 seconds
             setTimeout(() => {
                 downloadBtn.classList.remove('loading');
                 downloadBtn.textContent = '⬇ Download';
                 downloadBtn.disabled = false;
-            }, 3000);
+            }, 2000);
         }
 
 

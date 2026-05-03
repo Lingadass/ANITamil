@@ -114,6 +114,12 @@ body::before {
   gap: 28px;
   list-style: none;
   margin-left: auto;
+  align-items: center;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
@@ -121,12 +127,15 @@ body::before {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.98rem;
-  padding: 8px 16px;
+  padding: 10px 14px;
   border-radius: 10px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
   position: relative;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
 
 .nav-links a::after {
@@ -143,13 +152,14 @@ body::before {
 
 .nav-links a:hover {
   color: #fff;
-  background: rgba(135, 206, 235, 0.1);
+  background: rgba(135, 206, 235, 0.15);
   border-color: var(--sky-blue);
-  box-shadow: 0 0 16px rgba(135, 206, 235, 0.2);
+  box-shadow: 0 0 20px rgba(135, 206, 235, 0.25);
+  transform: translateY(-2px);
 }
 
 .nav-links a:hover::after {
-  width: calc(100% - 32px);
+  width: calc(100% - 28px);
 }
 
 /* ===== HAMBURGER MENU ===== */
@@ -1237,17 +1247,35 @@ footer span {
   flex-shrink: 0;
   margin-left: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(135, 206, 235, 0.3), rgba(176, 108, 245, 0.3));
+  transition: left 0.3s ease;
 }
 
 .theme-toggle:hover {
   background: rgba(135, 206, 235, 0.2);
   border-color: var(--sky-blue);
-  box-shadow: 0 0 20px rgba(135, 206, 235, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
-  transform: rotate(20deg) scale(1.1);
+  box-shadow: 0 0 24px rgba(135, 206, 235, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: rotate(20deg) scale(1.12);
+}
+
+.theme-toggle:hover::before {
+  left: 100%;
 }
 
 .theme-toggle:active {
   transform: rotate(20deg) scale(0.95);
+}
 }
 
 /* =====================================================
@@ -1367,13 +1395,16 @@ footer span {
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(135, 206, 235, 0.1);
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-links a:hover {
     background: rgba(135, 206, 235, 0.1);
     box-shadow: none;
     border-color: transparent;
+    transform: none;
   }
 
   .nav-links a::after {

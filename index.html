@@ -3,7 +3,15 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="αηιмєѕ தமிழ்">
+  <meta name="theme-color" content="#1a1a2e">
+
+  <meta name="google-site-verification" content="Bs-zn-4_h5NOEnhNXeSkznOBG7yhEcJbRddoLscS0Bg" />
+
+  
   <title>αηιмєѕ தமிழ் — Stream Anime in Tamil</title>
   <meta name="description"
     content="Watch your favourite anime dubbed & subbed in Tamil. High-quality streaming for free.">
@@ -25,6 +33,10 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="login.html" id="loginLink">🔐 Log In</a></li>
+      <li><a href="signup.html" id="signupLink">📝 Sign Up</a></li>
+      <li><a href="profile.html" id="userProfile" style="display: none;">👤 <span id="userName"></span></a></li>
+      <li><a href="#" id="logoutLink" style="display: none;">🚪 Logout</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">☀️</button>
   </nav>
@@ -127,11 +139,35 @@
             <div>Season 1 • 24 Episodes</div>
             <div>Season 2 • 11 Episodes</div>
             <div>Season 3 • 22 Episodes</div>
-            <div>Season 4 • 25 Episodes</div>
+            <div>Season 4 • 28 Episodes</div>
 
           </div>
         </div>
       </a>
+
+
+      <a href="The God Of High School.html" class="anime-card">
+        <img src="GOHS.jpg" alt="The God Of High School cover" loading="lazy" decoding="async">
+        <div class="card-body">
+          <div class="card-title">The God Of High School</div>
+          <div class="card-badge">
+            <div>Season 1 • 13 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="Black Clover.html" class="anime-card">
+        <img src="Black Clover.jpg" alt="Black Clover cover" loading="lazy" decoding="async">
+        <div class="card-body">
+          <div class="card-title">Black Clover</div>
+          <div class="card-badge">
+            <div>Season 1 • 52 Episodes</div>
+          </div>
+        </div>
+      </a>
+
+
+
 
 
       <!-- Placeholder cards (add more shows here) -->
@@ -233,6 +269,49 @@
       htmlEl.setAttribute('data-theme', next);
       localStorage.setItem('animeTheme', next);
       themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+
+  <!-- Firebase Authentication -->
+  <script type="module">
+    import { auth, onAuthStateChanged, signOut } from './firebase-config.js';
+
+    const loginLink = document.getElementById('loginLink');
+    const signupLink = document.getElementById('signupLink');
+    const userProfile = document.getElementById('userProfile');
+    const userName = document.getElementById('userName');
+    const logoutLink = document.getElementById('logoutLink');
+
+    // Monitor authentication state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is logged in
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        userProfile.style.display = 'block';
+        logoutLink.style.display = 'block';
+        
+        // Display user's email
+        const userEmail = user.email.split('@')[0]; // Get name before @
+        userName.textContent = userEmail;
+      } else {
+        // User is logged out
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        userProfile.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    });
+
+    // Logout functionality
+    logoutLink.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        console.log('User logged out successfully');
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
     });
   </script>
 

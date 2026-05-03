@@ -1,19 +1,39 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr Stone — αηιмєѕ தமிழ்</title>
-    <meta name="description" content="Watch Dr Stone Season 1 , Season 2 , Season 3 & Season 4 all episodes in Tamil on αηιмєѕ தமிழ்.">
+    <meta name="description"
+        content="Watch Dr Stone Season 1 , Season 2 , Season 3 & Season 4 all episodes in Tamil on αηιмєѕ தமிழ்.">
     <link rel="stylesheet" href="style.css">
     <script>/* apply saved theme before paint */
         (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
     </script>
-        <style>
+    <style>
         /* Page-specific keyframes — all other styles live in style.css */
-        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -27,7 +47,7 @@
                 <button class="modal-close" id="modalClose" title="Close (Esc)">✕</button>
             </div>
             <div class="modal-video-wrap">
-                <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+                <iframe id="modalIframe" title="Anime Video Player" src="" allowfullscreen allow="autoplay"></iframe>
             </div>
             <div class="modal-controls">
                 <button class="modal-nav-btn btn-prev" id="btnPrev">◀ Previous</button>
@@ -36,7 +56,7 @@
                     <button class="quality-btn" data-quality="480p">480p</button>
                     <button class="quality-btn" data-quality="360p">360p</button>
                 </div>
-                <div class="modal-ep-counter" id="epCounter">— / 83</div>
+                <div class="modal-ep-counter" id="epCounter">— / 85</div>
                 <button class="download-btn" id="downloadBtn" title="Download current episode">
                     ⬇ Download
                 </button>
@@ -71,7 +91,7 @@
             <div class="show-info">
                 <h1>DR. STONE</h1>
                 <p>
-                    4 Seasons &nbsp;•&nbsp; 83 Episodes &nbsp;•&nbsp; 2019–2025
+                    4 Seasons &nbsp;•&nbsp; 85 Episodes &nbsp;•&nbsp; 2019–2025
                 </p>
                 <div class="genre-tags">
                     <span class="genre-tag action">Action</span>
@@ -141,7 +161,7 @@
                 </div>
             </div>
 
-             <!-- Season 3 block -->
+            <!-- Season 3 block -->
             <div class="season-block" id="block-s3">
                 <div class="season-header" id="hdr-s3" role="button" aria-expanded="false" aria-controls="body-s3">
                     <div class="season-header-left">
@@ -167,14 +187,14 @@
                 </div>
             </div>
 
-             <!-- Season 4 block -->
+            <!-- Season 4 block -->
             <div class="season-block" id="block-s4">
                 <div class="season-header" id="hdr-s4" role="button" aria-expanded="false" aria-controls="body-s4">
                     <div class="season-header-left">
                         <div class="season-num-badge">4</div>
                         <div class="season-header-info">
                             <div class="season-header-title">Season 4</div>
-                            <div class="season-header-meta">26 Episodes &nbsp;·&nbsp; 2025</div>
+                            <div class="season-header-meta">28 Episodes &nbsp;·&nbsp; 2025</div>
                         </div>
                     </div>
                     <span class="season-chevron">▼</span>
@@ -244,8 +264,8 @@
             { label: 'Dr Stone — Season 2 Episode 9', url: 'https://drive.google.com/file/d/1JVDuVndWMd5tWzR6WZXgbSmQQFb_Otom/view?usp=sharing' },
             { label: 'Dr Stone — Season 2 Episode 10', url: 'https://drive.google.com/file/d/1ATpRQl6hZGScYroOAm5VMZZbNTkkjUM-/view?usp=sharing' },
             { label: 'Dr Stone — Season 2 Episode 11', url: 'https://drive.google.com/file/d/1ucEwqcA9Daft1rrnwrE8-rvjVcVFARDV/view?usp=sharing' },
-            
-            
+
+
         ];
 
         const season3 = [
@@ -271,8 +291,8 @@
             { label: 'Dr Stone — Season 3 Episode 20', url: 'https://drive.google.com/file/d/1ZikJDOFQU_DJ3jID4ygStzwUelaqoI4o/view?usp=sharing' },
             { label: 'Dr Stone — Season 3 Episode 21', url: 'https://drive.google.com/file/d/1P1e0JWHpzfxWgBtkA77sJETI6NFgsoBy/view?usp=sharing' },
             { label: 'Dr Stone — Season 3 Episode 22', url: 'https://drive.google.com/file/d/1yNCNewZjNbOmIn0y5IX7TniF-juU-4Ep/view?usp=sharing' },
-            
-            
+
+
         ];
 
         const season4 = [
@@ -302,7 +322,10 @@
             { label: 'Dr Stone — Season 4 Episode 24', url: 'https://drive.google.com/file/d/1spovQ21am7vmxv4k4UzeiW9qRvMHb0e1/view?usp=sharing' },
             { label: 'Dr Stone — Season 4 Episode 25', url: 'https://drive.google.com/file/d/1--M8hIaftUi_hyAnR4hgngerikZuRmaN/view?usp=sharing' },
             { label: 'Dr Stone — Season 4 Episode 26', url: 'https://drive.google.com/file/d/1MRCEFjX_CHVzvxDNYSsenkmUCYEJcWFD/view?usp=sharing' },
-           
+            { label: 'Dr Stone — Season 4 Episode 27', url: 'https://drive.google.com/file/d/1hPSWmcLy6W4K1usl5j9pTdg7dsu19UQX/view?usp=sharing' },
+            { label: 'Dr Stone — Season 4 Episode 28', url: 'https://drive.google.com/file/d/1YYCMc8BHPx_6A4CV0vBUCANm_5qKWF1G/view?usp=sharing' },
+            { label: 'Dr Stone — Season 4 Episode 28', url: 'https://drive.google.com/file/d/1be9qfqEKFm0XWNxWsNtZE_IQPIM2T0sP/view?usp=sharing' },
+
 
         ];
 
@@ -379,7 +402,7 @@
             document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
             const activeLink = document.getElementById(`ep-${index}`);
             if (activeLink) activeLink.classList.add('ep-active');
-            
+
             // Reset quality buttons
             qualityBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-quality="720p"]').classList.add('active');
@@ -394,38 +417,30 @@
 
         function downloadEpisode() {
             const ep = allEpisodes[currentEp];
+            let urlToDL = ep.url;
 
-            // Extract Google Drive file ID
+            // Extract Google Drive file ID from sharing URL
             const match = ep.url.match(/\/file\/d\/([^\/]+)\//);
-            if (!match || !match[1]) {
-                alert('Download link not available for this episode.');
-                return;
+            if (match && match[1]) {
+                urlToDL = `https://drive.google.com/uc?export=download&id=${match[1]}`;
             }
 
-            const fileId = match[1];
-            // Use drive.usercontent.google.com with confirm=t to bypass the
-            // antivirus-scan redirect page and start the download directly.
-            const downloadUrl = `https://drive.usercontent.google.com/download?id=${fileId}&export=download&authuser=0&confirm=t`;
-
             downloadBtn.classList.add('loading');
-            downloadBtn.textContent = '⏳ Starting...';
+            downloadBtn.textContent = '⏳ Preparing...';
             downloadBtn.disabled = true;
 
-            // Create a hidden <a> with the download attribute so the browser
-            // saves the file instead of navigating away.
+            // Open download link
             const a = document.createElement('a');
-            a.href = downloadUrl;
-            a.download = ep.label.replace(/[^\w\s\-\.]/g, '') + '.mp4';
-            document.body.appendChild(a);
+            a.href = urlToDL;
+            a.target = '_blank';
             a.click();
-            document.body.removeChild(a);
 
-            // Reset button after 3 seconds
+            // Reset button after 2 seconds
             setTimeout(() => {
                 downloadBtn.classList.remove('loading');
                 downloadBtn.textContent = '⬇ Download';
                 downloadBtn.disabled = false;
-            }, 3000);
+            }, 2000);
         }
 
 
@@ -457,7 +472,7 @@
         // ─── Hamburger menu ──────────────────────────────────────────────────────
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-        
+
         hamburger.addEventListener('click', function () {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');

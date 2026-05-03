@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo Leveling — αηιмєѕ தமிழ்</title>
-    <meta name="description" content="Watch Solo Leveling Season 1 & Season 2 all episodes in Tamil on αηιмєѕ தமிழ்.">
+    <title>Black Clover — αηιмєѕ தமிழ்</title>
+    <meta name="description" content="Watch Black Clover Season 1 & Season 2 all episodes in Tamil on αηιмєѕ தமிழ்.">
     <link rel="stylesheet" href="style.css">
     <script>/* apply saved theme before paint */
         (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
@@ -36,7 +36,7 @@
                     <button class="quality-btn" data-quality="480p">480p</button>
                     <button class="quality-btn" data-quality="360p">360p</button>
                 </div>
-                <div class="modal-ep-counter" id="epCounter">— / 25</div>
+                <div class="modal-ep-counter" id="epCounter">— / 52</div>
                 <button class="download-btn" id="downloadBtn" title="Download current episode">
                     ⬇ Download
                 </button>
@@ -67,16 +67,16 @@
 
         <!-- SHOW HEADER -->
         <div class="show-header">
-            <img src="solo s1.jpg" alt="Solo Leveling cover" loading="lazy" decoding="async">
+            <img src="Black clover.jpg" alt="Black Clover cover" loading="lazy" decoding="async">
             <div class="show-info">
-                <h1>SOLO LEVELING</h1>
+                <h1>BLACK CLOVER</h1>
                 <p>
-                    2 Seasons &nbsp;•&nbsp; 25 Episodes &nbsp;•&nbsp; 2024–2025
+                    Season 1 &nbsp;•&nbsp; 52 Episodes &nbsp;•&nbsp; 2017-2021
                 </p>
                 <div class="genre-tags">
                     <span class="genre-tag action">Action</span>
                     <span class="genre-tag anime">Anime</span>
-                    <span class="genre-tag hero">Fantasy</span>
+                    <span class="genre-tag hero">Shounen</span>
                 </div>
                 <p class="show-description">
                     Choose a season below, then click any episode to watch it right here. 🎬
@@ -89,14 +89,15 @@
 
         <!-- SEASON ACCORDION -->
         <div class="seasons-wrap" id="seasonsWrap">
+
             <!-- Season 1 block -->
             <div class="season-block" id="block-s1">
                 <div class="season-header" id="hdr-s1" role="button" aria-expanded="false" aria-controls="body-s1">
                     <div class="season-header-left">
                         <div class="season-num-badge">1</div>
-                        <div class="season-header-info">
+                        <div>
                             <div class="season-header-title">Season 1</div>
-                            <div class="season-header-meta">12 Episodes &nbsp;·&nbsp; 2024</div>
+                            <div class="season-header-meta">52 Episodes &nbsp;·&nbsp; 2024</div>
                         </div>
                     </div>
                     <span class="season-chevron">▼</span>
@@ -105,7 +106,7 @@
                     <div class="season-body-inner">
                         <div class="season-content">
                             <div class="season-cover">
-                                <img src="solo s1.jpg" alt="Solo Leveling Season 1" loading="lazy" decoding="async">
+                                <img src="Black Clover S1.jpg" alt="Black Clover Season 1" loading="lazy" decoding="async">
                             </div>
                             <div class="season-episodes">
                                 <ul class="episode-list" id="listS1"></ul>
@@ -115,31 +116,8 @@
                 </div>
             </div>
 
-            <!-- Season 2 block -->
-            <div class="season-block" id="block-s2">
-                <div class="season-header" id="hdr-s2" role="button" aria-expanded="false" aria-controls="body-s2">
-                    <div class="season-header-left">
-                        <div class="season-num-badge">2</div>
-                        <div class="season-header-info">
-                            <div class="season-header-title">Season 2</div>
-                            <div class="season-header-meta">13 Episodes &nbsp;·&nbsp; 2025</div>
-                        </div>
-                    </div>
-                    <span class="season-chevron">▼</span>
-                </div>
-                <div class="season-body" id="body-s2">
-                    <div class="season-body-inner">
-                        <div class="season-content">
-                            <div class="season-cover">
-                                <img src="solo s2.jpg" alt="Solo Leveling Season 2" loading="lazy" decoding="async">
-                            </div>
-                            <div class="season-episodes">
-                                <ul class="episode-list" id="listS2"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+
         </div>
 
     </div>
@@ -154,37 +132,62 @@
     <script>
         // ─── Episode data ──────────────────────────────────────────────────────────
         const season1 = [
-            { label: 'Solo Leveling — Season 1 Episode 1', url: 'https://drive.google.com/file/d/1uVhaXCt6RNa9ego82Qu_BcbiCU2VrGZD/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 2', url: 'https://drive.google.com/file/d/14IYNyfYYzATH8yxV2j2l_XCs-uoqdfFQ/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 3', url: 'https://drive.google.com/file/d/1P9TpLiTATBW8KGkWl5CMCbRIHXSGxNJR/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 4', url: 'https://drive.google.com/file/d/1Ylj_T3DyDFpFFcVcheEHLJy1DTB4wp7y/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 5', url: 'https://drive.google.com/file/d/14bsEhXuZEp-wzehlIRP1xturOY-nUKjt/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 6', url: 'https://drive.google.com/file/d/1n-SBauPeKWTvGv5-VHaGtevv0x-AOTN5/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 7', url: 'https://drive.google.com/file/d/1QwDE7u9gGz8J2Y6owMQOWgcfctTa0F3n/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 8', url: 'https://drive.google.com/file/d/1myJLio4i3PErS7VkNpYP8USlmz0CrIw1/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 9', url: 'https://drive.google.com/file/d/1FaERsHpEO-Bws0KXCM_BvxjWlmPhcoXh/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 10', url: 'https://drive.google.com/file/d/1ivHVRDfSS1d2zr7zyU7_JTTGEe1-WD3E/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 11', url: 'https://drive.google.com/file/d/1gWZEyqBjoKFK-hkrRPuEJWgblCbDsdDU/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 1 Episode 12', url: 'https://drive.google.com/file/d/1y6Xw1PN9EXOcAr_3AK91Cvc6cEbIfnQJ/view?usp=sharing' },
+            { label: 'Black Clover — Season 1 Episode 1', url: 'https://drive.google.com/file/d/1ODPbHvJEhEMpphtI4MxRCnHUGXmP1tiV/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 2', url: 'https://drive.google.com/file/d/1UU6DMYvfNjdgx-czAlC-QVXr_h1ueQlT/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 3', url: 'https://drive.google.com/file/d/1fp06RDOdwftq0lW15S4uNfMXd6vimS-R/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 4', url: 'https://drive.google.com/file/d/147hRagMRsgIPIV0D53DgfWSum-laJky3/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 5', url: 'https://drive.google.com/file/d/1hx0wmpyjPti8TizTmMIxTGmv3ncDwISy/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 6', url: 'https://drive.google.com/file/d/1q7LnzBNbZkUUWpS2-jgmQ9IhrlIVIlir/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 7', url: 'https://drive.google.com/file/d/16MvOg9ebQ0H7MaVcecm7iQT22Mqzcdz2/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 8', url: 'https://drive.google.com/file/d/1AsIBkCfFNQz-Bp7a3dCff4TRUzwnJFNo/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 9', url: 'https://drive.google.com/file/d/16DXvcwOeLI66t9OxpJB8tHux8fPv2nIG/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 10', url: 'https://drive.google.com/file/d/1ffPq-OgUAM6AscoiG_Q5oQ6_a7YMpHwx/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 11', url: 'https://drive.google.com/file/d/1TDnt6CKVh8oF5mcPyg6MbT69pBbmj9pi/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 12', url: 'https://drive.google.com/file/d/1ku1aMR34oBhOyInc1qjT79qwLTLvL-Q6/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 13', url: 'https://drive.google.com/file/d/1seFA0r91bk8-u1pZyEKzcgGpgho2S2MD/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 14', url: 'https://drive.google.com/file/d/12w76KF4JlneqTBJmibyP7TG2EaC3A2d1/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 15', url: 'https://drive.google.com/file/d/1xRk1DCmww_YLrAiUZ01_tJFTzHuUz1rH/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 16', url: 'https://drive.google.com/file/d/1O9LygKLz4t2v1fXNx--AKS7kRJ373syA/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 17', url: 'https://drive.google.com/file/d/1rYxMDRkAYCaDwPFj208exHD-0DpUpXCZ/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 18', url: 'https://drive.google.com/file/d/1ztxoA6_M03mwa7ZdaEwH3BLgy6uEzq-6/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 19', url: 'https://drive.google.com/file/d/1YQ4ZGFRJcFFOziHP7ryG60n-5vrGi-Hg/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 20', url: 'https://drive.google.com/file/d/1003yUZefJmhm5v-bn42cq-cFcBUf1Kmr/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 21', url: 'https://drive.google.com/file/d/1nypsdMPqKhxxxCl2USI6wyjwSKQftTIE/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 22', url: 'https://drive.google.com/file/d/1fzC5f1wbf9sOoAqkiLy27fHo5FhXYRzz/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 23', url: 'https://drive.google.com/file/d/1_gjJJTzLBx9CuyI6VPsvhYlcbNpOs1Sj/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 24', url: 'https://drive.google.com/file/d/1h2pwCmJOZrFb5NExrcI9Pcqk-jPaqbt_/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 25', url: 'https://drive.google.com/file/d/1vTQSO6mHoZk7KQks492SP2wtjo2FNkQ2/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 26', url: 'https://drive.google.com/file/d/1W5kCnkiEDYukoO-WlAtehgl3UT6zfNxh/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 27', url: 'https://drive.google.com/file/d/1fP_kt8_ywPyBqBD8XFNz-qHctT_Kmmp9/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 28', url: 'https://drive.google.com/file/d/1cFwmqe0yg_zBHIG69gk7wKfw1a-eI2rd/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 29', url: 'https://drive.google.com/file/d/1rcgXAd_u4LQvGD85NG6L_ZZRvOPipj1w/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 30', url: 'https://drive.google.com/file/d/1GQHpieshRv08iTudhfadLTmQG_kX_81U/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 31', url: 'https://drive.google.com/file/d/1RqxE4C7LSFc72aBbK0ppRc-T9F8D0yFf/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 32', url: 'https://drive.google.com/file/d/11ycaToQ2TkcVKYUf12bIoVbeEXOgBtCK/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 33', url: 'https://drive.google.com/file/d/1ajj0gp3xN7RAtzWEq52D7Rs4c3wvOy00/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 34', url: 'https://drive.google.com/file/d/1F8uGpwolBcLbOCt_jxpoOchkNUZ0XtZn/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 35', url: 'https://drive.google.com/file/d/1EN5IN9hanwbucivZ3r1BJMKgd7P41Uz4/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 36', url: 'https://drive.google.com/file/d/18jjQ3Py9q21RgcNIhizg5OyiLKfL_dfh/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 37', url: 'https://drive.google.com/file/d/1yW2bL2XUI3VKsSQ8Ou470-_n8xtNUzNb/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 38', url: 'https://drive.google.com/file/d/1KJCh59lzcBtqf_SO4vPp98ZI-LniccoH/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 39', url: 'https://drive.google.com/file/d/1qVKRg0rlQJD0KMX1C6P8OE7jvjG9UlRe/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 40', url: 'https://drive.google.com/file/d/1Q9NmlAQa1TrAHIjie25ZDMcZDa-YQYuP/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 41', url: 'https://drive.google.com/file/d/1DWbmje2Cut4kT2jY8WESexI1O4_34SRt/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 42', url: 'https://drive.google.com/file/d/1GTsT0j_Vl5AwKKSDwWXC5KhdFjTHr4aM/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 43', url: 'https://drive.google.com/file/d/1z6HKS_v7naEfR71bDJf1O1Imvs-zz7Je/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 44', url: 'https://drive.google.com/file/d/1w0cN11PbFkwaNHTjjyJNapjziAgTkaDh/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 45', url: 'https://drive.google.com/file/d/191g0h7XyX-62N4xODG4WYwB1gnaFqEPl/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 46', url: 'https://drive.google.com/file/d/1o9afwUp92Q18mSyHH6MPzNlselTNKvGx/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 47', url: 'https://drive.google.com/file/d/15kICb1pFve39YVBaPz4xmDzAzr6nMhFi/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 48', url: 'https://drive.google.com/file/d/13fcKTHnzJXK2BI83XcnaROCqIEAhhWLm/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 49', url: 'https://drive.google.com/file/d/1zWOemoixFibdqLj236k2VJsVxp9vYJTT/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 50', url: 'https://drive.google.com/file/d/19eNcGR957ftd28TEfy8--QZLz8u13Xa3/view?usp=drive_link' },
+            { label: 'Black Clover — Season 1 Episode 51', url: 'https://drive.google.com/file/d/1IVCrdZCVjt_2vN_iQzRdhMXT2vHn7FC3/view?usp=sharing' },
+           
+            
         ];
 
-        const season2 = [
-            { label: 'Solo Leveling — Season 2 Episode 1', url: 'https://drive.google.com/file/d/1IjzMqtD7Y_SBeqILVMUnlSfg3XhmXo1v/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 2', url: 'https://drive.google.com/file/d/10p86-u-8fZY8ApGXpj6_M9XxDjuBGa7Q/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 3', url: 'https://drive.google.com/file/d/19uBN0tsDxMdpln0hG-L6F0Eg7XUlYu9P/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 4', url: 'https://drive.google.com/file/d/1JFUv3l7pcqd-PRpn9R97tC0fVpBRX4ox/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 5', url: 'https://drive.google.com/file/d/1leb76k-bzOQLSTDB-DMPxwBK-_z2aYOi/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 6', url: 'https://drive.google.com/file/d/1lFZ7qhd5c-HsrEj6fSJP_s6IhPM8PXvB/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 7', url: 'https://drive.google.com/file/d/1n5coBb0jm1GEZaZLY8qxPSFANbpWjKbd/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 8', url: 'https://drive.google.com/file/d/18JoOBF2Pi8stqohJ4Cr_eW7ccv4NH1OD/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 9', url: 'https://drive.google.com/file/d/1JeRLNgBQoNaOzQdPpWjeDvNzkOidreZi/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 10', url: 'https://drive.google.com/file/d/1cB8NsCUAOwWn56t9BPSMLrH3ICCONfIc/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 11', url: 'https://drive.google.com/file/d/1Cwk_2B2__at_NwvU65Ex0F7rU3hdv6Q6/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 12', url: 'https://drive.google.com/file/d/1ubi7bubGo36geHR6Kqh0ZbDBHFhF1UfR/view?usp=sharing' },
-            { label: 'Solo Leveling — Season 2 Episode 13', url: 'https://drive.google.com/file/d/1vlQkmRSlWMcG6zUk0UPcUDq3KfOYryGQ/view?usp=sharing' },
-        ];
-
-        const allEpisodes = [...season1, ...season2];
+        const allEpisodes = [...season1];
         const total = allEpisodes.length;
         let currentEp = 0;
 
@@ -212,7 +215,6 @@
         }
 
         buildList('listS1', season1, 0);
-        buildList('listS2', season2, season1.length);
 
         // ─── Season accordion toggle ───────────────────────────────────────────────
         function toggleSeason(blockId, headerId) {
@@ -224,7 +226,6 @@
         }
 
         document.getElementById('hdr-s1').addEventListener('click', () => toggleSeason('block-s1', 'hdr-s1'));
-        document.getElementById('hdr-s2').addEventListener('click', () => toggleSeason('block-s2', 'hdr-s2'));
 
         // ─── Modal elements ────────────────────────────────────────────────────────
         const modal = document.getElementById('videoModal');
