@@ -1879,3 +1879,240 @@ html[data-theme="light"] ::-webkit-scrollbar-track { background: #eaf5ff; }
 html[data-theme="light"] ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--sky-blue), var(--purple));
 }
+
+/* =====================================================================
+   AUTH GATE — Loading Overlay
+   ===================================================================== */
+#authOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ag-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(135, 206, 235, 0.18);
+  border-top-color: var(--sky-blue);
+  border-radius: 50%;
+  animation: ag-spin 0.85s linear infinite;
+}
+
+@keyframes ag-spin { to { transform: rotate(360deg); } }
+
+.ag-label {
+  color: rgba(135, 206, 235, 0.75);
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* =====================================================================
+   TOAST NOTIFICATIONS
+   ===================================================================== */
+#toastContainer {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ag-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  max-width: 340px;
+  pointer-events: auto;
+}
+
+.ag-toast.ag-toast-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.ag-toast-success {
+  background: linear-gradient(135deg, rgba(81, 207, 102, 0.2), rgba(81, 207, 102, 0.1));
+  border: 1.5px solid rgba(81, 207, 102, 0.45);
+  color: #6ee07a;
+}
+
+.ag-toast-error {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 107, 107, 0.1));
+  border: 1.5px solid rgba(255, 107, 107, 0.45);
+  color: #ff8a8a;
+}
+
+.ag-toast-info {
+  background: linear-gradient(135deg, rgba(135, 206, 235, 0.2), rgba(135, 206, 235, 0.1));
+  border: 1.5px solid rgba(135, 206, 235, 0.45);
+  color: var(--sky-blue);
+}
+
+.ag-toast-icon { font-size: 1rem; flex-shrink: 0; }
+.ag-toast-msg  { line-height: 1.4; }
+
+@media (max-width: 480px) {
+  #toastContainer { bottom: 16px; right: 12px; left: 12px; }
+  .ag-toast { max-width: 100%; }
+}
+
+/* =====================================================================
+   USER NAV CHIP (injected by auth-gate.js)
+   ===================================================================== */
+.nav-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sky-blue), var(--purple));
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(135, 206, 235, 0.4);
+}
+
+.nav-user-chip {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--sky-blue) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-user-chip:hover {
+  background: rgba(135, 206, 235, 0.12);
+  border-color: var(--sky-blue);
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(135, 206, 235, 0.2);
+  transform: translateY(-2px);
+}
+
+.nav-chip-name {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-logout-btn {
+  color: var(--light-red) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-logout-btn:hover {
+  background: rgba(255, 107, 107, 0.12);
+  border-color: var(--light-red);
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* =====================================================================
+   WELCOME BANNER (index.html)
+   ===================================================================== */
+#welcomeBanner {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto 24px;
+  padding: 14px 28px;
+  max-width: 560px;
+  background: linear-gradient(135deg, rgba(135, 206, 235, 0.12), rgba(176, 108, 245, 0.12));
+  border: 1.5px solid rgba(135, 206, 235, 0.3);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: none;
+}
+
+#welcomeBanner.wb-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#welcomeBanner .wb-emoji { font-size: 1.4rem; }
+
+#welcomeBanner .wb-text {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#welcomeBanner .wb-name {
+  color: var(--sky-blue);
+  font-weight: 700;
+}
+
+#welcomeBanner .wb-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+#welcomeBanner .wb-profile-btn {
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(135, 206, 235, 0.15);
+  border: 1px solid rgba(135, 206, 235, 0.4);
+  color: var(--sky-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+#welcomeBanner .wb-profile-btn:hover {
+  background: rgba(135, 206, 235, 0.28);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  #welcomeBanner { flex-direction: column; text-align: center; gap: 10px; }
+  #welcomeBanner .wb-actions { margin-left: 0; }
+}

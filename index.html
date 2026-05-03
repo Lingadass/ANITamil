@@ -51,6 +51,15 @@
       <p class="hero-subtitle">Explore thousands of episodes in your favorite language</p>
     </section>
 
+    <!-- WELCOME BANNER (shown when logged in) -->
+    <div id="welcomeBanner">
+      <span class="wb-emoji">🎌</span>
+      <span class="wb-text">Welcome back, <span class="wb-name"></span>!</span>
+      <div class="wb-actions">
+        <a href="profile.html" class="wb-profile-btn">👤 My Profile</a>
+      </div>
+    </div>
+
     <!-- SEARCH BAR -->
     <div class="search-wrap">
       <div class="search-box">
@@ -272,48 +281,10 @@
     });
   </script>
 
-  <!-- Firebase Authentication -->
-  <script type="module">
-    import { auth, onAuthStateChanged, signOut } from './firebase-config.js';
+  
 
-    const loginLink = document.getElementById('loginLink');
-    const signupLink = document.getElementById('signupLink');
-    const userProfile = document.getElementById('userProfile');
-    const userName = document.getElementById('userName');
-    const logoutLink = document.getElementById('logoutLink');
-
-    // Monitor authentication state
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is logged in
-        loginLink.style.display = 'none';
-        signupLink.style.display = 'none';
-        userProfile.style.display = 'block';
-        logoutLink.style.display = 'block';
-        
-        // Display user's email
-        const userEmail = user.email.split('@')[0]; // Get name before @
-        userName.textContent = userEmail;
-      } else {
-        // User is logged out
-        loginLink.style.display = 'block';
-        signupLink.style.display = 'block';
-        userProfile.style.display = 'none';
-        logoutLink.style.display = 'none';
-      }
-    });
-
-    // Logout functionality
-    logoutLink.addEventListener('click', async (e) => {
-      e.preventDefault();
-      try {
-        await signOut(auth);
-        console.log('User logged out successfully');
-      } catch (error) {
-        console.error('Logout error:', error);
-      }
-    });
-  </script>
+  <!-- Auth Gate -->
+  <script type="module" src="auth-gate.js"></script>
 
 </body>
 

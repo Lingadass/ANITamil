@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,6 +18,21 @@
 </head>
 
 <body>
+
+  <!-- Auth loading overlay -->
+  <script>
+    (function(){
+      document.body.style.opacity='0';
+      var s=document.createElement('style');
+      s.textContent='@keyframes ag-spin{to{transform:rotate(360deg)}}.ag-spinner{width:44px;height:44px;border:3px solid rgba(135,206,235,.18);border-top-color:#87ceeb;border-radius:50%;animation:ag-spin .85s linear infinite}.ag-label{color:rgba(135,206,235,.7);font-family:Outfit,Arial,sans-serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}';
+      document.head.appendChild(s);
+      var ov=document.createElement('div');
+      ov.id='authOverlay';
+      ov.style.cssText='position:fixed;inset:0;z-index:9999;background:#1a1a2e;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px';
+      ov.innerHTML='<div class="ag-spinner"></div><div class="ag-label">Loading…</div>';
+      document.body.appendChild(ov);
+    })();
+  </script>
 
     <!-- ===== VIDEO MODAL ===== -->
     <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalEpTitle">
@@ -364,6 +379,9 @@
             themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
         });
     </script>
+
+    <!-- Auth Gate -->
+    <script type="module" src="auth-gate.js"></script>
 
 </body>
 
